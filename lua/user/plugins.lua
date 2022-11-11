@@ -49,53 +49,53 @@ return packer.startup(function(use)
     use "nvim-lua/plenary.nvim"                             -- useful lua functions used ny lots of plugins
 
     use {
-        "nvim-lua/popup.nvim",                               -- an implementation of the Popup API from vim in Neovim
+        "nvim-lua/popup.nvim",                              -- an implementation of the Popup API from vim in Neovim
         after = "plenary.nvim"
     }
     use {
-        "windwp/nvim-autopairs",                             -- close brackets etc.
+        "windwp/nvim-autopairs",                            -- close brackets etc.
         after = "nvim-cmp",
         config = function ()
             require(G_PlugLL_Dir .. "autopairs")
         end
     }
     use {
-        "numToStr/Comment.nvim",                           -- comment support
+        "numToStr/Comment.nvim",                            -- comment support
         event = "CursorMoved",
         config = function()
             require(G_PlugLL_Dir .. "comment")
         end
     }
     use {
-        "lukas-reineke/indent-blankline.nvim",               -- indent lines customization
+        "lukas-reineke/indent-blankline.nvim",              -- indent lines customization
         event = "BufWinEnter",
         config = function()
             require(G_PlugLL_Dir .. "blankline")
         end
     }
     use {
-        "chentoast/marks.nvim",                           -- better marks functionalities
+        "chentoast/marks.nvim",                             -- better marks functionalities
         event = "UIEnter",
         config = function()
             require(G_PlugLL_Dir .. "marks")
         end
     }
     use {
-        "norcalli/nvim-colorizer.lua",                       -- highlights color codes in the file itself
+        "norcalli/nvim-colorizer.lua",                      -- highlights color codes in the file itself
         event = "BufWinEnter",
         config = function()
             require(G_PlugLL_Dir .. "colorizer")
         end
     }
     use {
-        "tpope/vim-surround",                                -- manage surrounding symbols with ease (parenthesis, brakets, ... )
+        "tpope/vim-surround",                               -- manage surrounding symbols with ease (parenthesis, brakets, ... )
         event = "CursorMoved",
     }
     use "lewis6991/impatient.nvim"                          -- improves neovim startup times
     use "ahmedkhalf/project.nvim"                           -- project manager
     use "akinsho/toggleterm.nvim"                           -- terminal toggler
     use {
-        "folke/todo-comments.nvim",                          -- temporary comment tags functionalities
+        "folke/todo-comments.nvim",                         -- temporary comment tags functionalities
         event = "BufWinEnter",
         config = function()
             require(G_PlugLL_Dir .. "todo-comments")
@@ -134,42 +134,42 @@ return packer.startup(function(use)
         after = "nvim-cmp"
     }
     use {
-	    "hrsh7th/cmp-cmdline",                               -- cmdline completions
+	    "hrsh7th/cmp-cmdline",                              -- cmdline completions
         after = "nvim-cmp"
-    }
-    use { 
-	    "hrsh7th/cmp-calc",                                  -- math calculations completion
-        after = "nvim-cmp"
-    }
-    use { 
-	    "hrsh7th/cmp-nvim-lua",                              -- lua specific completions
-        after = "nvim-cmp"
-    }
-    use { 
-	    "hrsh7th/cmp-emoji",                                 -- emoji completios
-        after = "nvim-cmp"
-    }
-    use { 
-	    "f3fora/cmp-spell",                                  -- spelling completions
-        after = "nvim-cmp"
-    }
-    use { 
-	    "saadparwaiz1/cmp_luasnip",                          -- snippet completions
-        after = "nvim-cmp"
-    }
-    use { 
-	    "ray-x/cmp-treesitter",                              -- Treesitter completions
-        after = "nvim-cmp"
-    }
-    use { 
-	    "petertriho/cmp-git",                                -- github/gitlab completions
-    }
-
-    use { 
-	    "David-Kunz/cmp-npm",                                -- NPM dependencies manager
     }
     use {
-	    "hrsh7th/cmp-nvim-lsp",                              -- LSP specific completions
+	    "hrsh7th/cmp-calc",                                 -- math calculations completion
+        after = "nvim-cmp"
+    }
+    use {
+	    "hrsh7th/cmp-nvim-lua",                             -- lua specific completions
+        after = "nvim-cmp"
+    }
+    use {
+	    "hrsh7th/cmp-emoji",                                -- emoji completios
+        after = "nvim-cmp"
+    }
+    use {
+	    "f3fora/cmp-spell",                                 -- spelling completions
+        after = "nvim-cmp"
+    }
+    use {
+	    "saadparwaiz1/cmp_luasnip",                         -- snippet completions
+        after = "nvim-cmp"
+    }
+    use {
+	    "ray-x/cmp-treesitter",                             -- Treesitter completions
+        after = "nvim-cmp"
+    }
+    use {
+	    "petertriho/cmp-git",                               -- github/gitlab completions
+    }
+
+    use {
+	    "David-Kunz/cmp-npm",                               -- NPM dependencies manager
+    }
+    use {
+	    "hrsh7th/cmp-nvim-lsp",                             -- LSP specific completions
         after = "nvim-cmp",
         config = function()
             require(G_PlugLL_Dir .. "cmp-nvim-lsp")
@@ -187,7 +187,7 @@ return packer.startup(function(use)
     -- Snippets
     use "rafamadriz/friendly-snippets"                      -- multiple community snippets
     use {
-        "L3MON4D3/LuaSnip",                                  -- snippet engine
+        "L3MON4D3/LuaSnip",                                 -- snippet engine
         event = "InsertEnter",
         after = "friendly-snippets",
     }
@@ -198,7 +198,7 @@ return packer.startup(function(use)
     use "williamboman/mason-lspconfig.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
     use {
-        "RRethy/vim-illuminate",                         -- highlights other uses of the word under the cursor
+        "RRethy/vim-illuminate",                            -- highlights other uses of the word under the cursor
         event = "InsertEnter",
         config = function()
             require(G_PlugLL_Dir .. "illuminate")
@@ -212,6 +212,7 @@ return packer.startup(function(use)
     -- Telescope & extensions.
     use {
         "nvim-telescope/telescope.nvim",
+        event = "BufWinEnter",
         config = function()
             require(G_PlugLL_Dir .. "telescope")
         end
@@ -264,11 +265,11 @@ return packer.startup(function(use)
 
     -- Languages, Programming Languages, etc.. Specifics.
     use {
-        "lervag/vimtex",                                     -- Latex
+        "lervag/vimtex",                                    -- Latex
         event = { "BufRead *.latex", "BufRead *.tex" },
     }
     use {
-        "simrat39/rust-tools.nvim",                          -- Rust
+        "simrat39/rust-tools.nvim",                         -- Rust
         event = { "BufRead *.rs", "BufRead *.toml" }
     }
     use {                                                   -- Cargo.toml crates dependencies manager

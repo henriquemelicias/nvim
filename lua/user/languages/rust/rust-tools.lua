@@ -1,8 +1,4 @@
-local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
-if not rust_tools_status_ok then
-    vim.notify("ERROR: [Rust] Plugin rust_tools failed to load")
-    return
-end
+local rust_tools = require "rust-tools"
 
 local extension_path = vim.env.HOME .. '/.local/share/nvim/mason/packages/codelldb/extension/'
 local codelldb_path = extension_path .. 'adapter/codelldb'
