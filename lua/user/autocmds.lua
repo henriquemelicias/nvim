@@ -1,5 +1,5 @@
 -- Util modules.
-local bufferUtils = require("user.utils.buffers")
+local keymapUtils = require("user.utils.keymaps")
 
 -- Files to use with an IDE like environemtn.
 local ide_environment_filetypes = {
@@ -44,25 +44,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 -- Auto open tagbar on new tabs/buffers.
---
 -- Tagbar toggle messes up Dapui, this has a fix for it.
-local dap_ui_status_ok, dapui = pcall(require, "dapui")
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
     pattern = ide_environment_filetypes,
 	callback = function()
-        local isDapuiOpen = bufferUtils.isWindowFromBufferOpen("DAP Scopes")
-
-        if isDapuiOpen then
-            dapui.close()
-        end
-
-		vim.cmd([[
-            :call tagbar#autoopen(0)
-        ]])
-
-        if isDapuiOpen then
-            dapui.open( { reset = true } )
-        end
+        keymapUtils.toggleDapui()
 	end,
 })
 

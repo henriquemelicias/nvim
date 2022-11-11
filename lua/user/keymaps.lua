@@ -99,10 +99,10 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 keymap("n", "<leader>q", ":NvimTreeToggle<cr>", opts)
 
 -- Tagbar (Classes, Functions, Variables... menu)
-keymap("n", "<leader>e", "<cmd>lua KeymapToggleTagbar()<CR>", opts)
+keymap("n", "<leader>e", "<cmd>lua require('user.utils.keymaps').toggleTagbar()<CR>", opts)
 
 -- DAPUI
-keymap("n", "<leader>d", "<cmd>lua KeymapToggleDapui()<CR>", opts )
+keymap("n", "<leader>d", "<cmd>lua require('user.utils.keymaps').toggleDapui()<CR>", opts )
 
 -- Telescope Builtin
 keymap("n", "<leader>fm", ":Telescope builtin<CR>", opts)                   -- menu with builtin functions

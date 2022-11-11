@@ -1,8 +1,10 @@
+M = {}
+
  -- Util functions.
 local buffersUtil = require('user.utils.buffers')
 
  -- Tagbar toggle messes up width of Dapui, this is a fix.
-function KeymapToggleTagbar()
+function M.toggleTagbar()
     local isDapuiOpen = buffersUtil.isWindowFromBufferOpen( "DAP Scopes" )
 
     if isDapuiOpen then
@@ -16,7 +18,7 @@ function KeymapToggleTagbar()
 end
 
 -- Tagbar toggle messes up width of Dapui, this is a fix.
-function KeymapToggleDapui()
+function M.toggleDapui()
     local isTagbarOpen = buffersUtil.isWindowFromBufferOpen( "Tagbar" )
 
     if isTagbarOpen then
@@ -33,3 +35,5 @@ function KeymapToggleDapui()
         ]])
     end
 end
+
+return M
