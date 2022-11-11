@@ -1,0 +1,8 @@
+I only remembered to do this halfway through.
+# TODO: Add the rest of the dependencies needed.
+
+Dependencies install:
+sudo pacman -S --needed ws-clipboard xclip
+
+Optional dependencies install:
+sudo pacman -S --needed bat glow

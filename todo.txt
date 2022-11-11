@@ -1,0 +1,2 @@
+-- make plugins lazy loaded.
+-- plugin keymaps to keymaps.lua for a global config file.
