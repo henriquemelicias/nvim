@@ -46,8 +46,12 @@ return packer.startup(function(use)
 
     -- General plugins.
     use "wbthomason/packer.nvim"                            -- have packer manage itself
-    use "nvim-lua/popup.nvim"                               -- an implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim"                             -- useful lua functions used ny lots of plugins
+
+    use {
+        "nvim-lua/popup.nvim",                               -- an implementation of the Popup API from vim in Neovim
+        after = "plenary.nvim"
+    }
     use {
         "windwp/nvim-autopairs",                             -- close brackets etc.
         after = "nvim-cmp",
@@ -55,22 +59,60 @@ return packer.startup(function(use)
             require(G_PlugLL_Dir .. "autopairs")
         end
     }
-    use "numToStr/Comment.nvim"                             -- comment support
-    use 'famiu/bufdelete.nvim'                              -- better :bdelete, e.g. adds Bdelete!
-    use "lukas-reineke/indent-blankline.nvim"               -- indent lines customization
-    use "chentoast/marks.nvim"                              -- better marks functionalities
-    use "norcalli/nvim-colorizer.lua"                       -- highlights color codes in the file itself
-    use "tpope/vim-surround"                                -- manage surrounding symbols with ease (parenthesis, brakets, ... )
+    use {
+        "numToStr/Comment.nvim",                           -- comment support
+        event = "CursorMoved",
+        config = function()
+            require(G_PlugLL_Dir .. "comment")
+        end
+    }
+    use {
+        "lukas-reineke/indent-blankline.nvim",               -- indent lines customization
+        event = "BufWinEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "blankline")
+        end
+    }
+    use {
+        "chentoast/marks.nvim",                           -- better marks functionalities
+        event = "UIEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "marks")
+        end
+    }
+    use {
+        "norcalli/nvim-colorizer.lua",                       -- highlights color codes in the file itself
+        event = "BufWinEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "colorizer")
+        end
+    }
+    use {
+        "tpope/vim-surround",                                -- manage surrounding symbols with ease (parenthesis, brakets, ... )
+        event = "CursorMoved",
+    }
     use "lewis6991/impatient.nvim"                          -- improves neovim startup times
     use "ahmedkhalf/project.nvim"                           -- project manager
     use "akinsho/toggleterm.nvim"                           -- terminal toggler
-    use "folke/todo-comments.nvim"                          -- temporary comment tags functionalities
+    use {
+        "folke/todo-comments.nvim",                          -- temporary comment tags functionalities
+        event = "BufWinEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "todo-comments")
+        end
+    }
 
     -- Layout.
     use "goolord/alpha-nvim"                                -- neovim greeter page
     use 'nvim-lualine/lualine.nvim'                         -- status line on the bottom
     use "akinsho/bufferline.nvim"                           -- tabs/buffers statusline on top
-    use "majutsushi/tagbar"                                 -- window for all classes, methods and variables
+    use {
+        "majutsushi/tagbar",                                 -- window for all classes, methods and variables
+        event = "UIEnter",
+        config = function ()
+            require(G_PlugLL_Dir .. "tagbar")
+        end
+    }
 
     -- Colorschemes
     use "ellisonleao/gruvbox.nvim"
@@ -78,78 +120,105 @@ return packer.startup(function(use)
     -- CMP & plugins.
     use {
         "hrsh7th/nvim-cmp",                                 -- the completion plugin
+        event = "InsertEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "cmp")
+        end
     }
     use {
-	"hrsh7th/cmp-buffer",                               -- buffer completions
---	after = "nvim-cmp"
+	    "hrsh7th/cmp-buffer",                               -- buffer completions
+        after = "nvim-cmp"
     }
     use {
-	"hrsh7th/cmp-path",                                 -- path completions
---	after = "nvim-cmp"
+	    "hrsh7th/cmp-path",                                 -- path completions
+        after = "nvim-cmp"
     }
     use {
 	    "hrsh7th/cmp-cmdline",                               -- cmdline completions
---	    after = "nvim-cmp"
+        after = "nvim-cmp"
     }
     use { 
 	    "hrsh7th/cmp-calc",                                  -- math calculations completion
---	    after = "nvim-cmp"
+        after = "nvim-cmp"
     }
     use { 
 	    "hrsh7th/cmp-nvim-lua",                              -- lua specific completions
---	    after = "nvim-cmp"
+        after = "nvim-cmp"
     }
     use { 
 	    "hrsh7th/cmp-emoji",                                 -- emoji completios
---	    after = "nvim-cmp"
+        after = "nvim-cmp"
     }
     use { 
 	    "f3fora/cmp-spell",                                  -- spelling completions
---	    after = "nvim-cmp"
+        after = "nvim-cmp"
     }
     use { 
 	    "saadparwaiz1/cmp_luasnip",                          -- snippet completions
---	    after = "nvim-cmp"
+        after = "nvim-cmp"
     }
     use { 
 	    "ray-x/cmp-treesitter",                              -- Treesitter completions
---	    after = "nvim-cmp"
+        after = "nvim-cmp"
     }
     use { 
 	    "petertriho/cmp-git",                                -- github/gitlab completions
---	    after = "nvim-cmp"
     }
 
     use { 
 	    "David-Kunz/cmp-npm",                                -- NPM dependencies manager
---	    after = "nvim-cmp"
     }
     use {
 	    "hrsh7th/cmp-nvim-lsp",                              -- LSP specific completions
---	    after = "nvim-cmp"
+        after = "nvim-cmp",
+        config = function()
+            require(G_PlugLL_Dir .. "cmp-nvim-lsp")
+        end
     }
-    use "hrsh7th/cmp-nvim-lsp-document-symbol"
-    use "hrsh7th/cmp-nvim-lsp-signature-help"
+    use {
+        "hrsh7th/cmp-nvim-lsp-document-symbol",
+        after = "nvim-cmp"
+    }
+    use {
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        after = "nvim-cmp"
+    }
 
     -- Snippets
-    use "L3MON4D3/LuaSnip"                                  -- snippet engine
     use "rafamadriz/friendly-snippets"                      -- multiple community snippets
+    use {
+        "L3MON4D3/LuaSnip",                                  -- snippet engine
+        event = "InsertEnter",
+        after = "friendly-snippets",
+    }
 
     -- LSP
     use "neovim/nvim-lspconfig"                             -- the LSP engine itself
     use "williamboman/mason.nvim"
     use "williamboman/mason-lspconfig.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
-    use "RRethy/vim-illuminate"                             -- highlights other uses of the word under the cursor
-
+    use {
+        "RRethy/vim-illuminate",                         -- highlights other uses of the word under the cursor
+        event = "InsertEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "illuminate")
+        end
+    }
     -- DAP
     use "mfussenegger/nvim-dap"
     use "rcarriga/nvim-dap-ui"
     use "ravenxrz/DAPInstall.nvim"
 
     -- Telescope & extensions.
-    use "nvim-telescope/telescope.nvim"
-    use "nvim-telescope/Telescope-media-files.nvim"
+    use {
+        "nvim-telescope/telescope.nvim",
+        config = function()
+            require(G_PlugLL_Dir .. "telescope")
+        end
+    }
+    use {
+        "nvim-telescope/Telescope-media-files.nvim",
+    }
     use {                                                   -- C port of fzf for faster sorting
         'nvim-telescope/telescope-fzf-native.nvim',
         run = "make"
@@ -194,9 +263,14 @@ return packer.startup(function(use)
     use "kyazdani42/nvim-tree.lua"
 
     -- Languages, Programming Languages, etc.. Specifics.
-    use "lervag/vimtex"                                     -- Latex
-
-    use "simrat39/rust-tools.nvim"                          -- Rust
+    use {
+        "lervag/vimtex",                                     -- Latex
+        event = { "BufRead *.latex", "BufRead *.tex" },
+    }
+    use {
+        "simrat39/rust-tools.nvim",                          -- Rust
+        event = { "BufRead *.rs", "BufRead *.toml" }
+    }
     use {                                                   -- Cargo.toml crates dependencies manager
         'saecki/crates.nvim',
         event = { "BufRead Cargo.toml" },

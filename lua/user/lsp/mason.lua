@@ -24,7 +24,7 @@ local mason_reg = require("mason-registry")
 -- DAP DEBUGGERS
 for _, debugger in pairs(debuggers) do
     if not mason_reg.is_installed( debugger ) then
-        cmd("MasonInstall " .. debugger)
+        vim.cmd("MasonInstall " .. debugger)
     end
 end
 

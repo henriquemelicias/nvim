@@ -2,23 +2,20 @@
 local keymapUtils = require("user.utils.keymaps")
 
 -- Files to use with an IDE like environemtn.
-local ide_environment_filetypes = {
-    "*.rs",
-    "*.toml",
-}
+local ide_environment_filetypes = vim.api.nvim_get_var("IDE_FILE_PATTERNS")
 
--- Entering Vim: IDE environment startup.
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-    pattern = ide_environment_filetypes,
-	callback = function()
-        vim.cmd(
-            [[
-                :NvimTreeOpen
-                :TagbarOpen
-                :wincmd w
-            ]])
-	end,
-})
+-- -- Entering Vim: IDE environment startup.
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, {
+--     pattern = ide_environment_filetypes,
+-- 	callback = function()
+--         vim.cmd(
+--             [[
+--                 :NvimTreeOpen
+--                 :Tagbar
+--                 :wincmd w
+--             ]])
+-- 	end,
+-- })
 
 -- Close NvmTree when using :q, :wq or :qall.
 -- Sometimes nvim-tree bugged and didn't close correctly when closing, blocking the program exit.
@@ -48,7 +45,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
     pattern = ide_environment_filetypes,
 	callback = function()
-        keymapUtils.toggleDapui()
+        -- keymapUtils.toggleTagbar()
 	end,
 })
 
@@ -88,18 +85,3 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	end,
 })
 
--- Illuminate Plugin settings.
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-	callback = function()
-        vim.cmd("IlluminateResume") -- Start Illuminate
-	end,
-})
-
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	callback = function()
-	local line_count = vim.api.nvim_buf_line_count(0)
-		if line_count >= 5000 then
-			vim.cmd("IlluminatePauseBuf") -- pause Illuminate on large files
-		end
-	end,
-})

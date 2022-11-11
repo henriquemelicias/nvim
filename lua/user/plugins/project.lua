@@ -11,10 +11,3 @@ project.setup({
 	patterns = { ".git", "Makefile", "package.json", "justfile" },
 })
 
-local tele_status_ok, telescope = pcall(require, "telescope")
-if not tele_status_ok then
-    vim.notify("ERROR: Plugin telescope failed to load")
-	return
-end
-
-telescope.load_extension('projects')

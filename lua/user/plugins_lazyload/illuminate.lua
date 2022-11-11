@@ -37,3 +37,17 @@ illuminate.configure {
     providers_regex_syntax_allowlist = {},
     under_cursor = true,
 }
+
+-- Illuminate Plugin settings.
+vim.cmd("IlluminateResume")
+
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	callback = function()
+	local line_count = vim.api.nvim_buf_line_count(0)
+		if line_count >= 5000 then
+			vim.cmd("IlluminatePauseBuf") -- pause Illuminate on large files
+        else
+            vim.cmd("IlluminateResumeBuf") -- resume Illuminate on small files")
+	    end
+    end
+})

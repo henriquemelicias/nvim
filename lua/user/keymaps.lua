@@ -45,7 +45,7 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Create/close new buffers.
 keymap("n", "<C-t>n", ":tabnew<CR>", opts )
-keymap("n", "<C-t>d", ":Bdelete<CR>", opts )
+keymap("n", "<C-t>d", ":bdelete<CR>", opts )
 
 -- Cancel search highlighting with ESC.
 keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", opts)
