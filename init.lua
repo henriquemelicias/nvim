@@ -12,20 +12,18 @@ require(configs .. "mason")           -- package management
 require(configs .. "lsp")             -- language server protocol
 
 -- [ PLUGINS ] --
+-- Lazy loaded plugins are configured on the "./lua/user/plugins.lua" file.
 local plugins = "user.plugins."
 
 require(plugins .. "impatient")       -- improve neovim startup time
 require(plugins .. "alpha")           -- neovim greeter
-require(plugins .. "luasnip")         -- snippets
-require(plugins .. "dap")             -- debugger
-require(plugins .. "colorscheme")     -- themes
-require(plugins .. "gitsigns")        -- git signs decorations
-require(plugins .. "treesitter")      -- parser generator tool for concrete syntax tree of a source file
-require(plugins .. "nvim-tree")       -- directory tree viewer
 require(plugins .. "bufferline")      -- tabs line above
+require(plugins .. "colorscheme")     -- themes
 require(plugins .. "lualine")         -- status line below
-require(plugins .. "toggleterm")      -- toggles the terminal window
-require(plugins .. "project")         -- create/manage projects
+require(plugins .. "luasnip")         -- snippets
+require(plugins .. "treesitter")
+require(plugins .. "dap")             -- debugger
+require(plugins .. "project")         -- projects detection
 
 -- [ LANGUAGES ] --
 local langs = "user.languages."

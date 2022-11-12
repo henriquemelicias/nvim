@@ -1,4 +1,4 @@
-vim.g.tagbar_width = 70
+vim.g.tagbar_width = 65
 vim.g.tagbar_sort = 0
 vim.g.tagbar_wrap = 1
 vim.g.tagbar_show_data_type = 1

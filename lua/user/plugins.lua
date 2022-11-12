@@ -75,7 +75,7 @@ return packer.startup(function(use)
     }
     use {
         "chentoast/marks.nvim",                             -- better marks functionalities
-        event = "UIEnter",
+        event = "VimEnter",
         config = function()
             require(G_PlugLL_Dir .. "marks")
         end
@@ -92,8 +92,16 @@ return packer.startup(function(use)
         event = "CursorMoved",
     }
     use "lewis6991/impatient.nvim"                          -- improves neovim startup times
-    use "ahmedkhalf/project.nvim"                           -- project manager
-    use "akinsho/toggleterm.nvim"                           -- terminal toggler
+    use {
+        "ahmedkhalf/project.nvim",                           -- project manager
+    }
+    use {
+        "akinsho/toggleterm.nvim",                           -- terminal toggler
+        event = "VimEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "toggleterm")
+        end
+    }
     use {
         "folke/todo-comments.nvim",                         -- temporary comment tags functionalities
         event = "BufWinEnter",
@@ -108,7 +116,7 @@ return packer.startup(function(use)
     use "akinsho/bufferline.nvim"                           -- tabs/buffers statusline on top
     use {
         "majutsushi/tagbar",                                 -- window for all classes, methods and variables
-        event = "UIEnter",
+        event = "VimEnter",
         config = function ()
             require(G_PlugLL_Dir .. "tagbar")
         end
@@ -212,7 +220,7 @@ return packer.startup(function(use)
     -- Telescope & extensions.
     use {
         "nvim-telescope/telescope.nvim",
-        event = "BufWinEnter",
+        event = "VimEnter",
         config = function()
             require(G_PlugLL_Dir .. "telescope")
         end
@@ -238,13 +246,19 @@ return packer.startup(function(use)
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
     }
-    use "nvim-tree/nvim-web-devicons"                       -- icons as a dependency of many other plugins
-    use "p00f/nvim-ts-rainbow"
+    use {
+        "p00f/nvim-ts-rainbow",
+    }
     use "JoosepAlviste/nvim-ts-context-commentstring"
 
     -- Git
-    use "lewis6991/gitsigns.nvim"
-
+    use { 
+        "lewis6991/gitsigns.nvim",
+        event = "VimEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "gitsigns")
+        end
+    }
     -- Github Copilot.
     use {
         "zbirenbaum/copilot.lua",
@@ -261,7 +275,14 @@ return packer.startup(function(use)
     }
 
     -- Nvim-tree
-    use "kyazdani42/nvim-tree.lua"
+    use "nvim-tree/nvim-web-devicons"                       -- icons as a dependency of many other plugins
+    use {
+        "kyazdani42/nvim-tree.lua",
+        event = "VimEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "nvim-tree")
+        end
+    }
 
     -- Languages, Programming Languages, etc.. Specifics.
     use {

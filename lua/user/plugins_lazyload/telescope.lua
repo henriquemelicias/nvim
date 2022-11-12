@@ -171,4 +171,6 @@ telescope.load_extension("media_files")
 telescope.load_extension("repo")
 telescope.load_extension('luasnip')
 telescope.load_extension("menu")
-telescope.load_extension('projects')
+
+-- Plugin projects must be loaded first.
+telescope.load_extension("projects")
