@@ -301,6 +301,14 @@ _G.packer_plugins = {
     path = "/home/henry/.local/share/nvim/site/pack/packer/opt/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["link-visitor.nvim"] = {
+    config = { "\27LJ\2\nA\0\0\4\0\3\0\0066\0\0\0006\2\1\0'\3\2\0&\2\3\2B\0\2\1K\0\1\0\17link-visitor\17G_PlugLL_Dir\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/henry/.local/share/nvim/site/pack/packer/opt/link-visitor.nvim",
+    url = "https://github.com/xiyaowong/link-visitor.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/henry/.local/share/nvim/site/pack/packer/start/lualine.nvim",
@@ -340,7 +348,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp_luasnip", "cmp-nvim-lsp", "cmp-spell", "cmp-buffer", "cmp-calc", "cmp-nvim-lua", "cmp-emoji", "cmp-nvim-lsp-signature-help", "cmp-treesitter", "cmp-cmdline", "copilot-cmp", "cmp-nvim-lsp-document-symbol", "cmp-path", "nvim-autopairs" },
+    after = { "cmp-nvim-lsp-document-symbol", "cmp-path", "cmp-treesitter", "cmp-spell", "cmp-nvim-lsp", "cmp-nvim-lua", "cmp_luasnip", "nvim-autopairs", "cmp-buffer", "cmp-calc", "cmp-emoji", "cmp-nvim-lsp-signature-help", "cmp-cmdline", "copilot-cmp" },
     config = { "\27LJ\2\n8\0\0\4\0\3\0\0066\0\0\0006\2\1\0'\3\2\0&\2\3\2B\0\2\1K\0\1\0\bcmp\17G_PlugLL_Dir\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -530,15 +538,15 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au BufRead *.rs ++once lua require("packer.load")({'rust-tools.nvim'}, { event = "BufRead *.rs" }, _G.packer_plugins)]]
+vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'link-visitor.nvim', 'indent-blankline.nvim', 'todo-comments.nvim', 'nvim-colorizer.lua'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead Cargo.toml ++once lua require("packer.load")({'crates.nvim'}, { event = "BufRead Cargo.toml" }, _G.packer_plugins)]]
 vim.cmd [[au CursorMoved * ++once lua require("packer.load")({'vim-surround', 'Comment.nvim'}, { event = "CursorMoved *" }, _G.packer_plugins)]]
-vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'indent-blankline.nvim', 'todo-comments.nvim', 'nvim-colorizer.lua'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'gitsigns.nvim', 'marks.nvim', 'telescope.nvim', 'nvim-tree.lua', 'tagbar', 'toggleterm.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead *.toml ++once lua require("packer.load")({'rust-tools.nvim'}, { event = "BufRead *.toml" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'copilot.lua', 'nvim-cmp', 'vim-illuminate', 'LuaSnip'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufRead *.latex ++once lua require("packer.load")({'vimtex'}, { event = "BufRead *.latex" }, _G.packer_plugins)]]
 vim.cmd [[au BufRead *.tex ++once lua require("packer.load")({'vimtex'}, { event = "BufRead *.tex" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead *.rs ++once lua require("packer.load")({'rust-tools.nvim'}, { event = "BufRead *.rs" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead *.toml ++once lua require("packer.load")({'rust-tools.nvim'}, { event = "BufRead *.toml" }, _G.packer_plugins)]]
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'gitsigns.nvim', 'toggleterm.nvim', 'telescope.nvim', 'tagbar', 'marks.nvim', 'nvim-tree.lua'}, { event = "VimEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead Cargo.toml ++once lua require("packer.load")({'crates.nvim'}, { event = "BufRead Cargo.toml" }, _G.packer_plugins)]]
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'LuaSnip', 'nvim-cmp', 'vim-illuminate', 'copilot.lua'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 

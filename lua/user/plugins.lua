@@ -109,6 +109,13 @@ return packer.startup(function(use)
             require(G_PlugLL_Dir .. "todo-comments")
         end
     }
+    use {
+        "xiyaowong/link-visitor.nvim",
+        event = "BufWinEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "link-visitor")
+        end
+    }
 
     -- Layout.
     use "goolord/alpha-nvim"                                -- neovim greeter page
@@ -252,7 +259,7 @@ return packer.startup(function(use)
     use "JoosepAlviste/nvim-ts-context-commentstring"
 
     -- Git
-    use { 
+    use {
         "lewis6991/gitsigns.nvim",
         event = "VimEnter",
         config = function()
