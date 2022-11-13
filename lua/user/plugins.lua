@@ -93,10 +93,10 @@ return packer.startup(function(use)
     }
     use "lewis6991/impatient.nvim"                          -- improves neovim startup times
     use {
-        "ahmedkhalf/project.nvim",                           -- project manager
+        "ahmedkhalf/project.nvim",                          -- project manager
     }
     use {
-        "akinsho/toggleterm.nvim",                           -- terminal toggler
+        "akinsho/toggleterm.nvim",                          -- terminal toggler
         event = "VimEnter",
         config = function()
             require(G_PlugLL_Dir .. "toggleterm")
@@ -110,19 +110,28 @@ return packer.startup(function(use)
         end
     }
     use {
-        "xiyaowong/link-visitor.nvim",
+        "xiyaowong/link-visitor.nvim",                      -- visit links
         event = "BufWinEnter",
         config = function()
             require(G_PlugLL_Dir .. "link-visitor")
         end
     }
+        use {
+        'abecodes/tabout.nvim',
+        event = "InsertEnter",
+        config = function()
+            require(G_PlugLL_Dir .. "tabout")
+        end,
+        wants = {'nvim-treesitter'}, -- or require if not used so far
+        after = {'nvim-cmp'} -- if a completion plugin is using tabs load it before
+        }
 
     -- Layout.
     use "goolord/alpha-nvim"                                -- neovim greeter page
     use 'nvim-lualine/lualine.nvim'                         -- status line on the bottom
     use "akinsho/bufferline.nvim"                           -- tabs/buffers statusline on top
     use {
-        "majutsushi/tagbar",                                 -- window for all classes, methods and variables
+        "majutsushi/tagbar",                                -- window for all classes, methods and variables
         event = "VimEnter",
         config = function ()
             require(G_PlugLL_Dir .. "tagbar")

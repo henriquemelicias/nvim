@@ -343,7 +343,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp_luasnip", "cmp-nvim-lsp-document-symbol", "cmp-path", "cmp-treesitter", "cmp-nvim-lua", "cmp-buffer", "cmp-calc", "cmp-emoji", "cmp-nvim-lsp", "cmp-cmdline", "copilot-cmp", "cmp-nvim-lsp-signature-help", "nvim-autopairs", "cmp-spell" },
+    after = { "cmp_luasnip", "cmp-calc", "cmp-path", "tabout.nvim", "cmp-nvim-lsp", "nvim-autopairs", "cmp-nvim-lsp-document-symbol", "cmp-cmdline", "copilot-cmp", "cmp-nvim-lsp-signature-help", "cmp-treesitter", "cmp-nvim-lua", "cmp-buffer", "cmp-emoji", "cmp-spell" },
     config = { "\27LJ\2\n8\0\0\4\0\3\0\0066\0\0\0006\2\1\0'\3\2\0&\2\3\2B\0\2\1K\0\1\0\bcmp\17G_PlugLL_Dir\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -436,6 +436,18 @@ _G.packer_plugins = {
     path = "/home/henry/.local/share/nvim/site/pack/packer/start/sqlite.lua",
     url = "https://github.com/kkharji/sqlite.lua"
   },
+  ["tabout.nvim"] = {
+    config = { "\27LJ\2\n;\0\0\4\0\3\0\0066\0\0\0006\2\1\0'\3\2\0&\2\3\2B\0\2\1K\0\1\0\vtabout\17G_PlugLL_Dir\frequire\0" },
+    load_after = {
+      ["nvim-cmp"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/henry/.local/share/nvim/site/pack/packer/opt/tabout.nvim",
+    url = "https://github.com/abecodes/tabout.nvim",
+    wants = { "nvim-treesitter" }
+  },
   tagbar = {
     config = { "\27LJ\2\n;\0\0\4\0\3\0\0066\0\0\0006\2\1\0'\3\2\0&\2\3\2B\0\2\1K\0\1\0\vtagbar\17G_PlugLL_Dir\frequire\0" },
     loaded = false,
@@ -525,23 +537,23 @@ _G.packer_plugins = {
 time([[Defining packer_plugins]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
+vim.cmd [[ packadd friendly-snippets ]]
 vim.cmd [[ packadd plenary.nvim ]]
 vim.cmd [[ packadd popup.nvim ]]
-vim.cmd [[ packadd friendly-snippets ]]
 time([[Sequenced loading]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'nvim-colorizer.lua', 'todo-comments.nvim', 'link-visitor.nvim', 'indent-blankline.nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead *.latex ++once lua require("packer.load")({'vimtex'}, { event = "BufRead *.latex" }, _G.packer_plugins)]]
+vim.cmd [[au CursorMoved * ++once lua require("packer.load")({'vim-surround', 'Comment.nvim'}, { event = "CursorMoved *" }, _G.packer_plugins)]]
 vim.cmd [[au BufRead *.tex ++once lua require("packer.load")({'vimtex'}, { event = "BufRead *.tex" }, _G.packer_plugins)]]
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'copilot.lua', 'vim-illuminate', 'nvim-cmp', 'LuaSnip'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead *.rs ++once lua require("packer.load")({'rust-tools.nvim'}, { event = "BufRead *.rs" }, _G.packer_plugins)]]
 vim.cmd [[au BufRead *.toml ++once lua require("packer.load")({'rust-tools.nvim'}, { event = "BufRead *.toml" }, _G.packer_plugins)]]
 vim.cmd [[au BufRead Cargo.toml ++once lua require("packer.load")({'crates.nvim'}, { event = "BufRead Cargo.toml" }, _G.packer_plugins)]]
-vim.cmd [[au CursorMoved * ++once lua require("packer.load")({'vim-surround', 'Comment.nvim'}, { event = "CursorMoved *" }, _G.packer_plugins)]]
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'tagbar', 'nvim-tree.lua', 'toggleterm.nvim', 'telescope.nvim', 'marks.nvim', 'gitsigns.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead *.rs ++once lua require("packer.load")({'rust-tools.nvim'}, { event = "BufRead *.rs" }, _G.packer_plugins)]]
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'marks.nvim', 'tagbar', 'nvim-tree.lua', 'gitsigns.nvim', 'toggleterm.nvim', 'telescope.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'link-visitor.nvim', 'indent-blankline.nvim', 'nvim-colorizer.lua', 'todo-comments.nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead *.latex ++once lua require("packer.load")({'vimtex'}, { event = "BufRead *.latex" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'tabout.nvim', 'LuaSnip', 'vim-illuminate', 'nvim-cmp', 'copilot.lua'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 
