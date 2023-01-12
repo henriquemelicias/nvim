@@ -1,5 +1,3 @@
-
-
 -- Shorten function name.
 local keymap = vim.api.nvim_set_keymap
 

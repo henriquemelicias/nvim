@@ -7,7 +7,7 @@ require(configs .. "plugins")         -- plugins management
 require(configs .. "keymaps")         -- general keymaps
 require(configs .. "autocmds")        -- autocommands on entering/exiting files, buffers, etc...
 
--- [ IDE PLUGINS ] -- 
+-- [ IDE PLUGINS ] --
 require(configs .. "mason")           -- package management
 require(configs .. "lsp")             -- language server protocol
 
@@ -32,3 +32,7 @@ require(langs .. "rust")
 -- [[ require("user.vimtex")           -- latex processor ]]
 
 
+-- [ OTHER ] --
+require(configs .. "highlights")       -- change highlights style
+
+-- TODO: check multiple cursors in vim/neovim.

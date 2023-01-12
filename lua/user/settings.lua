@@ -36,7 +36,7 @@ vim.api.nvim_set_var( "DAP_DEBUGGERS",
     }
 )
 
--- TODO: Way or plugin to remove postspaces ? 
+-- TODO: Check a whichkey plugin.
 
 -- Files to open on an IDE-like environemtn.
 vim.api.nvim_set_var( "IDE_FILE_PATTERNS",

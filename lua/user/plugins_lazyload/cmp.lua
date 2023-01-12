@@ -56,7 +56,7 @@ local kind_icons = {
 -------------------
 -- : / Commits
 -- # / Issues
--- @ / Mentions 
+-- @ / Mentions
 -- # / Pull Requests (Github)
 -- ! / Merge Requests (GitLab)
 require("cmp_git").setup( {
@@ -82,7 +82,7 @@ cmp.setup {
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
         end,
     },
-    mapping = cmp.mapping.preset.insert({
+    mapping = cmp.mapping.preset.insert( {
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
@@ -163,14 +163,14 @@ cmp.setup {
     -- max_item_count
     sources = {
         { name = "crates", group_index = 1 },
-        { name = "npm", group_index = 1, keyword_length = 4},
+        { name = "npm", group_index = 1, keyword_length = 4 },
         { name = "nvim_lsp", group_index = 2 },
         { name = "nvim_lsp_signature_help", group_index = 2 },
         { name = "nvim_lua", group_index = 2 },
         { name = "luasnip", group_index = 2 },
-        { name = "copilot", group_index = 2 },
-        { name = "buffer", group_index = 2, keyword_length = 3 },
         { name = "treesitter", group_index = 2 },
+        { name = "copilot", group_index = 2 },
+        { name = "buffer", group_index = 2, keyword_length = 4 },
         { name = "path", group_index = 2 },
         { name = "calc", group_index = 2 },
         { name = "emoji", group_index = 2 },

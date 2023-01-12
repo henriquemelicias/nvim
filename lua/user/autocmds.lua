@@ -4,6 +4,12 @@ local keymapUtils = require("user.utils.keymaps")
 -- Files to use with an IDE like environemtn.
 local ide_environment_filetypes = vim.api.nvim_get_var("IDE_FILE_PATTERNS")
 
+-- Remove trailling whitespace on save.
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
+})
+
 -- -- Entering Vim: IDE environment startup.
 -- vim.api.nvim_create_autocmd({ "VimEnter" }, {
 --     pattern = ide_environment_filetypes,
@@ -34,8 +40,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },
 	callback = function()
 		vim.cmd([[
-            nnoremap <silent> <buffer> q :close<CR> 
-            set nobuflisted 
+            nnoremap <silent> <buffer> q :close<CR>
+            set nobuflisted
         ]])
 	end,
 })
