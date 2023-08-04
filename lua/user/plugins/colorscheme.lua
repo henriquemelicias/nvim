@@ -1,33 +1,33 @@
-local themePlugin = "gruvbox"
+-- Theme used.
+return {
+    "sainnhe/gruvbox-material",
+    lazy = false,
+    priority = 1000,
+    config = function()
+        -- Options here. See :help gruvbox-material.txt
+        local opts = {
+            background = "medium",
+            foreground = "mix",
+            enable_bold = 1,
+            enable_italic = 1,
+            transparent_background = 0,
+            dim_inactive_windows = 1,
+            spell_foreground = "none",
+            ui_contrast = "high",
+            text_highlight = 1,
+            error_highlight = 1,
+            diagnostic_text_highlight = 1,
+            diagnostic_line_highlight = 1,
+            diagnostic_virtual_text = "highlight",
+            current_word = "bold",
+            statusline_style = "mix",
+        }
 
-local status_ok, colorscheme = pcall(require, themePlugin)
-if not status_ok then
-    vim.notify("ERROR: Plugin " .. themePlugin .. " failed to load")
-    return
-end
+        for key, value in pairs( opts ) do
+            vim.g["gruvbox_material_" .. key] = value
+        end
 
--- Default options:
-colorscheme.setup({
-    undercurl = true,
-    underline = true,
-    bold = true,
-    italic = true,
-    strikethrough = true,
-    invert_selection = false,
-    invert_signs = false,
-    invert_tabline = false,
-    invert_intend_guides = false,
-    inverse = true, -- invert background for search, diffs, statuslines and errors
-    contrast = "hard", -- can be "hard", "soft" or empty string
-    palette_overrides = {},
-    overrides = {},
-    dim_inactive = false,
-    transparent_mode = true,
-})
-
-local colorscheme_status_ok, _ = pcall(vim.cmd, "colorscheme " .. themePlugin )
-
-if not colorscheme_status_ok then
-  vim.notify("ERROR: failed to set colorscheme " .. themePlugin )
-  return
-end
+        -- Start.
+        vim.cmd( [[colorscheme gruvbox-material]] )
+    end,
+}

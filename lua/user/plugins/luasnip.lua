@@ -1,45 +1,27 @@
-local status_ok, luasnip = pcall(require, "luasnip")
-if not status_ok then
-    vim.notify("ERROR: Plugin luasnip failed to load")
-    return
-end
-
-luasnip.config.set_config {
-    -- Tells LuaSnip to remember to keep around the last snippet.
-    history = true,
-    updateevents = "TextChanged, TextChangedI",
-    enable_autosnippets = true,
-    ext_opts = {
-        [require("luasnip.util.types").choiceNode] = {
-            active = {
-                virt_text = { { "*", "Gruvbox" } }
-            }
-        }
-    }
+return {
+    "L3MON4D3/LuaSnip",
+    dependencies = {
+        "rafamadriz/friendly-snippets",
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+            require("luasnip.loaders.from_lua").lazy_load({paths = "user.snippets"})
+        end,
+    },
+    opts = {
+        history = true,
+        updateevents = "TextChanged, TextChangedI",
+        enable_auto_snippets = true,
+        delete_check_events = "TextChanged",
+    },
+    keys = {
+        {
+            "<tab>",
+            function()
+                return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+            end,
+            expr = true, silent = true, mode = "i",
+        },
+        { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
+        { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+    },
 }
-
--- expansion key
--- this will expand the current item or jump to the next item within the snippet.
-vim.keymap.set({ "i", "s" }, "<c-e>", function()
-    if luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-    end
-end, { silent = true })
-
--- selecting within a list of options.
--- This is useful for choice nodes (introduced in the forthcoming episode 2)
-vim.keymap.set("i", "<c-l>", function()
-    if luasnip.choice_active() then
-        luasnip.change_choice(1)
-    end
-end)
-
-vim.keymap.set({ "i", "s" }, "<C-h>", function()
-    if luasnip.choice_active() then
-        luasnip.change_choice(-1)
-    end
-end)
-
--- Snippets.
-require("luasnip/loaders/from_vscode").lazy_load()
-require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/snippets"})

@@ -1,36 +1,52 @@
-local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-    vim.notify( "ERROR: Plugin nvim-treesitter failed to load" )
-  return
-end
-
-treesitter_configs.setup {
-    ensure_installed = "all",
-    sync_install = false,
-    ignore_install = { "" },  -- List of parsers to ignore installing
-    highlight = {
-        enable = true,        -- false will disable the whole extension
-        disable = { "" },     -- list of language that will be disabled
-        additional_vim_regex_highlighting = true,
+return {
+    "nvim-treesitter/nvim-treesitter",
+    version = false,
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      init = function()
+        load_textobjects = true
+      end,
     },
-    autopairs = {
-        enable = true,
+    cmd = { "TSUpdateSync" },
+    keys = {
+        { "<c-space>", desc = "increment selection" },
+        { "<bs", desc = "Decrement selection", mode = "x" },
     },
-    indent = {
-        enable = true,
-        disable = { "yaml" }
-    },
-    rainbow = {
-        enable = true,
-        extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-        max_file_lines = nil, -- Do not enable for files with more than n lines, int
-    },
-    context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-    },
-    diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-    },
+    opts = {
+        ensure_installed = "all",
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+        },
+        autopairs = {
+            enable = true,
+        },
+        indent = {
+            enable = true,
+        },
+        rainbow = {
+            enable = true,
+            extended_mode = true,
+            max_file_lines = nil,
+        },
+        context_commentstring = {
+            enable = true,
+            enable_autocmd = false,
+        },
+        diagnostics = {
+            enable = true,
+            show_on_dirs = true,
+        },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "<C-space>",
+                node_incremental = "<C-space>",
+                scope_incremental = false,
+                node_decremental = "<bs>",
+            },
+        }
+    }
 }

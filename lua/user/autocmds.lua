@@ -1,63 +1,31 @@
--- Util modules.
-local keymapUtils = require("user.utils.keymaps")
+local create_autocmd = vim.api.nvim_create_autocmd
 
--- Files to use with an IDE like environemtn.
-local ide_environment_filetypes = vim.api.nvim_get_var("IDE_FILE_PATTERNS")
+-- Util modules.
+local SETTINGS = require( "user.configs.settings" )
 
 -- Remove trailling whitespace on save.
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+create_autocmd( { "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
-})
-
--- -- Entering Vim: IDE environment startup.
--- vim.api.nvim_create_autocmd({ "VimEnter" }, {
---     pattern = ide_environment_filetypes,
--- 	callback = function()
---         vim.cmd(
---             [[
---                 :NvimTreeOpen
---                 :Tagbar
---                 :wincmd w
---             ]])
--- 	end,
--- })
-
--- Close NvmTree when using :q, :wq or :qall.
--- Sometimes nvim-tree bugged and didn't close correctly when closing, blocking the program exit.
-vim.api.nvim_create_autocmd( { "QuitPre" }, {
-    callback = function()
-        vim.cmd(
-            [[
-                :NvimTreeClose
-            ]]
-        )
-    end,
 } )
 
 -- Close buffers with 'q' silently.
-vim.api.nvim_create_autocmd({ "FileType" }, {
+create_autocmd( { "FileType" }, {
 	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },
 	callback = function()
-		vim.cmd([[
+		vim.cmd( [[
             nnoremap <silent> <buffer> q :close<CR>
             set nobuflisted
-        ]])
+        ]] )
 	end,
 })
 
--- Auto open tagbar on new tabs/buffers.
--- Tagbar toggle messes up Dapui, this has a fix for it.
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-    pattern = ide_environment_filetypes,
-	callback = function()
-        -- keymapUtils.toggleTagbar()
-	end,
-})
+-- Delete bookmarks
+-- create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9", })
 
 -- Activate wrap and spell check on specific files.
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "gitcommit", "markdown", "txt"},
+create_autocmd( { "FileType" }, {
+	pattern = SETTINGS.SPELL_FILE_PATTERNS,
 	callback = function()
 		vim.opt_local.wrap = true
 		vim.opt_local.spell = true
@@ -65,29 +33,15 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 -- Autoresize buffers on window size change.
-vim.api.nvim_create_autocmd({ "VimResized" }, {
+create_autocmd( { "VimResized" }, {
 	callback = function()
-		vim.cmd("tabdo wincmd =")
+		vim.cmd( "tabdo wincmd =" )
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+-- Format: Don't insert current leader and don't format comments.
+create_autocmd( { "BufWinEnter" }, {
 	callback = function()
-		vim.cmd("set formatoptions-=cro")
+		vim.cmd( "set formatoptions-=cro" )
 	end,
 })
-
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-	callback = function()
-		vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
-	end,
-})
-
--- Java.
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	pattern = { "*.java" },
-	callback = function()
-		vim.lsp.codelens.refresh()
-	end,
-})
-

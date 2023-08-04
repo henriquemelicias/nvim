@@ -1,91 +1,62 @@
-local status_ok, bufferline = pcall(require, "bufferline")
-if not status_ok then
-    vim.notify("ERROR: Plugin bufferline failed to load")
-    return
-end
-
-bufferline.setup {
-    options = {
-        close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-        right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-        left_mouse_command = "buffer %d",
-        offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-        separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
-        show_tab_indicators = false,
-        show_close_icon = false
-    },
-
-    highlights = {
-        fill = {
-            fg = { attribute = "fg", highlight = "#ff0000" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        background = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        buffer_visible = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        close_button = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        close_button_visible = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        tab_selected = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-        tab = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        tab_close = {
-            fg = { attribute = "fg", highlight = "TabLineSel" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-        duplicate_selected = {
-            fg = { attribute = "fg", highlight = "TabLineSel" },
-            bg = { attribute = "bg", highlight = "TabLineSel" },
-            italic = true,
-        },
-        duplicate_visible = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-            italic = true,
-        },
-        duplicate = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-            italic = true,
-        },
-        modified = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        modified_selected = {
-            fg = { attribute = "fg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-        modified_visible = {
-            fg = { attribute = "fg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        separator = {
-            fg = { attribute = "bg", highlight = "TabLine" },
-            bg = { attribute = "bg", highlight = "TabLine" },
-        },
-        separator_selected = {
-            fg = { attribute = "bg", highlight = "Normal" },
-            bg = { attribute = "bg", highlight = "Normal" },
-        },
-        indicator_selected = {
-            fg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
-            bg = { attribute = "bg", highlight = "Normal" },
+-- Fancy looking tabs.
+return {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    opts = {
+        options = {
+            close_command = function(n) require("mini.bufremove").delete(n, false) end,
+            right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+            show_buffer_close_icons = false,
+            show_close_icon = false,
+            always_show_bufferline = false,
+            show_tab_indicators = false,
+            diagnostics = "nvim_lsp",
+            diagnostics_indicator = function(_, _, diag)
+                local icons = require( "user.configs.settings" ).ICONS.DIAGNOSTICS
+                local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+                .. (diag.warning and icons.Warn .. diag.warning or "")
+                return vim.trim( ret )
+            end,
+            offsets = {
+                {
+                    filetype = "neo-tree",
+                    text = "Neo-tree",
+                    highlight = "Directory",
+                    text_align = "left",
+                },
+                {
+                    filetype = "neo-tree",
+                    text = "Neo-tree",
+                    highlight = "Directory",
+                    text_align = "right",
+                },
+            },
         },
     },
+    keys = function()
+        local wk = require( "which-key" )
+
+        wk.register( {
+            name = "+bufferline",
+            p = { ":BufferLineTogglePin<CR>", "Toggle buffer pin" },
+            n = { ":tabnew<CR>", "Create new buffer" },
+            g = { ":BufferLineGoToBuffer ", "Go to buffer ..." },
+            c = {
+                name = "+close",
+                h = { ":BufferLineCloseLeft<CR>", "Close left buffers" },
+                l = { ":BufferLineCloseRight<CR>", "Close right buffers" },
+                o = { ":BufferLineCloseOthers<CR>", "Close the other buffers" },
+                d = { ":BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" },    -- Create/close tabs.
+            },
+            s = {
+                name = "+sort",
+                d = { ":BufferLineSortByDirectory<CR>", "Sort buffers by directory" },
+                e = { ":BufferLineSortByExtension<CR>", "Sort buffers by extension" },
+                r = { ":BufferLineSortByRelativeDirectory<CR>", "Sort buffers by relative dir" },
+                t = { ":BufferLineSortByTabs<CR>", "Sort buffers by tabs" },
+            },
+            h = { ":bprevious<CR>", "Go to the previous buffer" },
+            l = { ":bnext<CR>", "Go the the next buffer" },
+        }, { mode = "n", prefix = "<leader>b" } )
+    end
 }
