@@ -24,8 +24,8 @@ wk.register({
 		name = "+Tabs",
 	},
 	-- Navigate buffers (tabs)
-	["<M-n>"] = { ":bnext<CR>", "Next tab" },
-	["<M-p>"] = { ":bprevious<CR>", "Previous tab" },
+	["<C-n>"] = { ":bnext<CR>", "Next tab" },
+	["<C-p>"] = { ":bprevious<CR>", "Previous tab" },
 
 	-- Resize windows with arrows.
 	["<c-Up>"] = { ":resize +2<cr>", "Increase window horizontal size" },

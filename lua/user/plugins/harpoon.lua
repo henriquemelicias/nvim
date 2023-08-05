@@ -9,8 +9,6 @@ return {
 			a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add file" },
 			r = { "<cmd>lua require('harpoon.mark').rm_file()<cr>", "Remove file" },
 			h = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Menu" },
-			n = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Next file" },
-			p = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Previous file" },
 			["1"] = { "<cmd> lua require('harpoon.ui').nav_file(1)<cr>", "File 1" },
 			["2"] = { "<cmd> lua require('harpoon.ui').nav_file(2)<cr>", "File 2" },
 			["3"] = { "<cmd> lua require('harpoon.ui').nav_file(3)<cr>", "File 3" },
@@ -21,5 +19,10 @@ return {
 			["8"] = { "<cmd> lua require('harpoon.ui').nav_file(8)<cr>", "File 8" },
 			["9"] = { "<cmd> lua require('harpoon.ui').nav_file(9)<cr>", "File 9" },
 		}, { mode = "n", prefix = "<leader>h" })
+
+        wk.register( {
+			["<C-l>"] = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Harpoon next file" },
+			["<C-h>"] = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Harpoon previous file" },
+        }, { mode = "n" } )
 	end,
 }

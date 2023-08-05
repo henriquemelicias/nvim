@@ -2,16 +2,16 @@ return {
 	"echasnovski/mini.bufremove",
 	event = "VeryLazy",
 	keys = {
-		{ "<M-t>n", "<cmd>tabnew<CR>", desc = "New tab" },
+		{ "<C-t>n", "<cmd>tabnew<CR>", desc = "New tab" },
 		{
-			"<M-t>d",
+			"<C-t>d",
 			function()
 				require("mini.bufremove").delete(0, false)
 			end,
 			desc = "Close tab",
 		},
 		{
-			"<M-t>D",
+			"<C-t>D",
 			function()
 				require("mini.bufremove").delete(0, true)
 			end,
