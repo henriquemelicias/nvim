@@ -1,4 +1,4 @@
 return {
-    "airblade/vim-rooter",
-    event = "VeryLazy"
+	"airblade/vim-rooter",
+	event = "VeryLazy",
 }

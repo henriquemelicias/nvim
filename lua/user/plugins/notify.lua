@@ -1,4 +1,4 @@
 return {
-    "rcarriga/nvim-notify",
-    event = "VeryLazy"
+	"rcarriga/nvim-notify",
+	event = "VeryLazy",
 }

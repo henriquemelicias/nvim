@@ -10,8 +10,8 @@ return {
 			name = "+session",
 			l = {
 				function()
-                    require("persistence").load()
-                end,
+					require("persistence").load()
+				end,
 				"Restore session for current directory/project",
 			},
 			r = {

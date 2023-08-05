@@ -1,15 +1,15 @@
 return {
 	"kdheepak/lazygit.nvim",
-    event = "VeryLazy",
+	event = "VeryLazy",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
-    keys = function()
-        local wk = require( "which-key" )
+	keys = function()
+		local wk = require("which-key")
 
-        wk.register({
-            name = "+git",
-            l = { ":LazyGit<CR>", "Lazy git" }
-        }, { mode = "n", prefix = "<leader>g" })
-    end
+		wk.register({
+			name = "+git",
+			l = { ":LazyGit<CR>", "Lazy git" },
+		}, { mode = "n", prefix = "<leader>g" })
+	end,
 }

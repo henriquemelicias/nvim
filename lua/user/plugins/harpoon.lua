@@ -1,6 +1,6 @@
 return {
 	"ThePrimeagen/harpoon",
-    event = "VeryLazy",
+	event = "VeryLazy",
 	keys = function()
 		local wk = require("which-key")
 
