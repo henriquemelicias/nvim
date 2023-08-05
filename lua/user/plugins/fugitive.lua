@@ -5,7 +5,7 @@ return {
         local wk = require( "which-key" )
 
         wk.register( {
-            f = { ":Git", "Fugitive" },
-        }, { mode = "n", prefix = "<leafer>g"} )
+            g = { ":Git<CR>", "Fugitive" },
+        }, { mode = "n", prefix = "<leader>g"} )
     end
 }

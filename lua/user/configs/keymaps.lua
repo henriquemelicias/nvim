@@ -1,5 +1,5 @@
 local wk = require("which-key")
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 --   [ VIM MODES ]   --
 -----------------------
@@ -11,9 +11,17 @@ local keymap = vim.api.nvim_set_keymap
 --   command_mode = "c",
 -----------------------
 
--- Disable q: and Q from triggerring cmd commands history.
+-- Disable q: and Q from triggering cmd commands history.
 keymap("n", "q:", "<nop>", { noremap = true, silent = true })
 keymap("n", "Q", "<nop>", { noremap = true, silent = true })
+
+-- Keep cursor centered when scrolling with <C-u> and <C-d>.
+keymap("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
+keymap("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
+
+-- Keep current search highlighted centered.
+keymap("n", "n", "nzzzv", { noremap = true, silent = true })
+keymap("n", "N", "Nzzzv", { noremap = true, silent = true })
 
 ------------
 -- Normal --
@@ -45,7 +53,7 @@ wk.register({
 	p = {
 		name = "+project",
 		x = { ":Ex<CR>", "View file explorer mode in current dir" },
-        r = { ":let @+ = getcwd()<CR>", "Root dir path to clipboard" },
+		r = { ":let @+ = getcwd()<CR>", "Root dir path to clipboard" },
 	},
 }, { mode = "n", prefix = "<leader>" })
 
@@ -65,8 +73,8 @@ wk.register({
 
 wk.register({
 	-- Move text up and down.
-	["<A-k>"] = { ":m '<-2<CR>gv-gv", "Move selected text up" },
-	["<A-j>"] = { ":m '>+1<CR>gv-gv", "Move selected text down" },
+	["<A-k>"] = { ":m '<-2<CR>gv=gv", "Move selected text up" },
+	["<A-j>"] = { ":m '>+1<CR>gv=gv", "Move selected text down" },
 }, { mode = "x" })
 
 -------------------

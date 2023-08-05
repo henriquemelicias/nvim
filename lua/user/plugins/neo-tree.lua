@@ -75,7 +75,7 @@ return {
 			desc = "Neotree document symbols",
 		},
 		{
-			"<leader>gg",
+			"<leader>gn",
 			function()
 				require("neo-tree.command").execute({
 					toggle = true,
