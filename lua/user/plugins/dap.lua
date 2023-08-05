@@ -153,7 +153,6 @@ return {
 
 			require("user.languages.c").dap_setup()
 			require("user.languages.cpp").dap_setup()
-			require("user.languages.lua").dap_setup()
 			require("user.languages.bash").dap_setup()
 			require("user.languages.rust").dap_setup()
 			require("user.languages.python").dap_setup()
