@@ -104,6 +104,7 @@ return {
 					r = { ":Telescope repo<CR>", "Switch between VCS repos" },
 					s = { ":Telescope luasnip<CR>", "Lua snippets" },
 					t = { ":Telescope telescope-tabs list_tabs<CR>", "Switch between tabs" },
+                    n = { ":Telescope notify<CR>", "Notify messages" }
 				},
                 -- Git
                 g = {
@@ -111,6 +112,10 @@ return {
                     s = { ":Telescope git_stash<CR>", "Telescope git stash" },
                     c = { ":Telescope git_commits<CR>", "Telescope git commits" },
                     b = { ":Telescope git_branches<CR>", "Telescope git branches" },
+                },
+                -- Harpoon
+                h = {
+                    m = { ":Telescope harpoon marks<CR>", "Telescope harpoon menu" },
                 }
 			}, { mode = "n", prefix = "<leader>" })
 		end,

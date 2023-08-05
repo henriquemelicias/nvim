@@ -5,15 +5,10 @@ return {
     config = true,
     opts = {
         on_open = function(term)
-            vim.cmd("stopinsert!")
             vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
         end,
-        winbar = {
-            enabled = true,
-            name_formatter = function(term) --  term: Terminal
-                return "Terminal " .. term.job_id
-            end
-        }
+        start_in_insert = false,
+        autochdir = true,
     },
     keys = function ()
         local wk = require( "which-key" )
