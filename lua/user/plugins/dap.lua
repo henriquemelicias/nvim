@@ -6,23 +6,30 @@ return {
 			local wk = require("which-key")
 
 			wk.register({
-				["<F5>"] = { ":lua require('dapui').toggle( { reset = true } )<CR>", "Toggle DAP UI" },
+                ["<F4>"] = { ":lua require('dapui').toggle( { reset = true } )<CR>", "Toggle DAP UI" },
+                ["<F5>"] = { ":lua require('dapui').eval()<CR>", "DAP eval" },
 				["<F6>"] = { ":lua require('dap').toggle_breakpoint()<CR>", "Toggle breakpoint" },
+                ["<F7>"] = { ":lua require('dap').step_into()<CR>", "DAP step into" },
+                ["<F8>"] = { ":lua require('dap').step_over()<CR>", "DAP step over" },
+                ["<S-F8>"] = { ":lua require('dap').step_out()<CR>", "DAP step out" },
 				["<F9>"] = { ":lua require('dap').continue()<CR>", "DAP resume program" },
-				["<F8>"] = { ":lua require('dap').step_over()<CR>", "DAP step over" },
-				["<F7>"] = { ":lua require('dap').step_into()<CR>", "DAP step into" },
-				["<S-F8>"] = { ":lua require('dap').step_out()<CR>", "DAP step out" },
 			}, { mode = "n" })
+
+			wk.register({
+				["<F5>"] = { ":lua require('dapui').eval()<CR>", "DAP eval" },
+			}, { mode = { "n", "v" } })
 
 			wk.register({
 				d = {
 					name = "+debug",
 					s = {
-						name = "+step",
+						name = "+step/run",
 						c = { "<cmd>lua require('dap').continue()<CR>", "Continue" },
 						v = { "<cmd>lua require('dap').step_over()<CR>", "Step Over" },
 						i = { "<cmd>lua require('dap').step_into()<CR>", "Step Into" },
 						o = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
+                        r = { "<cmd>lua require('dap').run_to_cursor()<CR>", "Run to cursor" },
+                        l = { "<cmd>lua require('dap').run_last()<CR>", "Run last" },
 					},
 					h = {
 						name = "+hover",
@@ -79,11 +86,6 @@ return {
 					},
 				},
 				force_buffers = true,
-				icons = {
-					collapsed = "",
-					current_frame = "",
-					expanded = "",
-				},
 				layouts = {
 					{
 						elements = {

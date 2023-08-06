@@ -20,6 +20,7 @@ return {
 			dashboard.button("SPC f g", " " .. " Find text", ":Telescope live_grep <CR>"),
 			dashboard.button("SPC F f", " " .. " Frecency/MRU", ":Telescope frecency <CR>"),
 			dashboard.button("SPC F p", " " .. " Projects", ":Telescope project<CR>"),
+			dashboard.button("SPC F r", " " .. " Git Repos", ":Telescope repo<CR>"),
 			dashboard.button(
 				"SPC s r",
 				" " .. " Restore last session",
