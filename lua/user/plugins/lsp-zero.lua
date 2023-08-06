@@ -34,8 +34,13 @@ return {
 		},
 		config = function()
 			-- This is where all the LSP shenanigans will live
-			local ih = require("inlay-hints")
-			ih.setup()
+
+			require("inlay-hints").setup({
+				only_current_line = true,
+				eol = {
+					right_align = true,
+				},
+			})
 
 			local lsp = require("lsp-zero").preset()
 			local wk = require("which-key")
@@ -56,30 +61,40 @@ return {
 							"<cmd>lua vim.lsp.buf.implementation()<CR>",
 							"LSP list implementations of symbol",
 						},
-						o = {
-							"<cmd>lua vim.lsp.buf.type_definition()<CR>",
-							"LSP jump to definition of symbol",
-						},
-						r = { "<cmd>lua vim.lsp.buf.references()<CR>", "LSP list references of symbol" },
 						s = {
 							"<cmd>lua vim.lsp.buf.signature_help()<CR>",
 							"LSP signature info of symbol",
 						},
 						l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "LSP diagnostics in float window" },
 					},
-					["<F2>"] = { "<cmd>lua vim.lsp.buf.rename()<CR>", "LSP rename current symbol" },
-					["<F4>"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "LSP code action at position" },
+					["<leader>l"] = {
+						name = "+lsp",
+						a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code action at position" },
+						k = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
+						R = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename current symbol" },
+						d = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "List definitions of symbol" },
+						r = { "<cmd>lua vim.lsp.buf.references()<CR>", "List references of symbol" },
+					},
 					["["] = {
 						d = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "LSP diagnostics go previous" },
 					},
 					["]"] = {
 						d = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "LSP diagnostics go next" },
 					},
+					["<leader>pw"] = {
+						name = "+workspace",
+						a = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", "LSP add workspace folder" },
+						r = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", "LSP remove workspace folder" },
+						l = {
+							"<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+							"LSP list workspace folders",
+						},
+					},
 				}, { mode = "n", buffer = bufnr })
 			end)
 
 			-- LSP formatting --
-			lsp.format_mapping("<F3>", {
+			lsp.format_mapping("<leader>lf", {
 				format_opts = {
 					async = false,
 					timeout_ms = 10000,

@@ -21,8 +21,8 @@ return {
 		}, { mode = "n", prefix = "<leader>h" })
 
         wk.register( {
-			["<C-l>"] = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Harpoon next file" },
-			["<C-h>"] = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Harpoon previous file" },
+			["<C-n>"] = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Harpoon next file" },
+			["<C-p>"] = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Harpoon previous file" },
         }, { mode = "n" } )
 	end,
 }

@@ -60,17 +60,20 @@ function M.rust_analyzer_handler()
 
 				wk.register({
 					name = "+lsp",
-					r = {
+					l = {
 						name = "+rust",
 						a = { rust_tools.hover_actions.hover_actions, "Hover actions" },
 						d = { rust_tools.debuggables.debuggables, "Debuggables" },
+                        D = { ":RustLastDebug<CR>", "Last debuggable" },
 						h = { rust_tools.inlay_hints.enable, "Enable inlay hints" },
 						H = { rust_tools.inlay_hints.disable, "Disable inlay hints" },
 						r = { rust_tools.runnables.runnables, "Runnables" },
+                        j = { rust_tools.join_lines.join_lines, "Join lines" },
+                        R = { ":RustLastRun<CR>", "Last runnable" },
 						m = { rust_tools.expand_macro.expand_macro, "Expand macro" },
 						c = { rust_tools.open_cargo_toml.open_cargo_toml, "Open cargo.toml" },
 						p = { rust_tools.parent_module.parent_module, "Go to parent module" },
-						s = { ":RustSSR", "Structural search and replace" },
+						s = { ":RustSSR<CR>", "Structural search and replace" },
 					},
 				}, { mode = "n", prefix = "<leader>l", buffer = bufnr })
 			end,

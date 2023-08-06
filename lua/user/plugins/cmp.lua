@@ -31,12 +31,11 @@ return -- Autocompletion
 					{ name = "nvim_lsp", group_index = 2 },
 					{ name = "nvim_lsp_signature_help", group_index = 2 },
 					{ name = "nvim_lua", group_index = 2 },
-					{ name = "luasnip", group_index = 2 },
-					{ name = "treesitter", group_index = 2 },
-					{ name = "copilot", group_index = 2, max_item_count = 4 },
-					{ name = "buffer", group_index = 2, keyword_length = 4 },
-					{ name = "path", group_index = 2 },
 					{ name = "calc", group_index = 2 },
+					{ name = "luasnip", group_index = 2, max_item_count = 10 },
+					{ name = "copilot", group_index = 2, max_item_count = 4 },
+					{ name = "buffer", group_index = 2, keyword_length = 4, max_item_count = 10 },
+					{ name = "async_path", group_index = 2 },
 					{ name = "emoji", group_index = 2 },
 					{
 						name = "spell",
@@ -60,27 +59,25 @@ return -- Autocompletion
 					select = false,
 				},
 				formatting = {
-					fields = { "menu", "abbr", "kind" },
+					fields = { "abbr", "kind", "menu" },
 					format = function(entry, vim_item)
-						-- Kind icons
-
 						-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 						vim_item.menu = ({
-							crates = "[Crates]",
+							crates = "[CRATES]",
 							npm = "[NPM]",
 							nvim_lsp = "[LSP]",
 							nvim_lsp_document_symbol = "[LSP]",
 							nvim_lsp_signature_help = "[LSP]",
-							nvim_lua = "[Lua]",
-							luasnip = "[Luasnip]",
-							git = "[Git]",
-							buffer = "[Buffer]",
-							treesitter = "[Tree]",
-							path = "[Path]",
-							calc = "[Calc]",
-							copilot = "[Copilot]",
-							spell = "[Spell]",
-							emoji = "[Emoji]",
+							nvim_lua = "[LUA]",
+							luasnip = "[LUASNIP]",
+							git = "[GIT]",
+							buffer = "[BUFFER]",
+							treesitter = "[TREE]",
+							async_path = "[PATH]",
+							calc = "[CALC]",
+							copilot = "[COPILOT]",
+							spell = "[SPELL]",
+							emoji = "[EMOJI]",
 							zsh = "[ZSH]",
 						})[entry.source.name]
 
@@ -93,7 +90,6 @@ return -- Autocompletion
 					["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
 					["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 					["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-					["<m-o"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 					["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
 					["<C-a>"] = cmp.mapping({
 						i = cmp.mapping.abort(),
@@ -105,8 +101,10 @@ return -- Autocompletion
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = false,
 					}),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.expandable() then
+					["<Tab>"] = cmp.mapping( function(fallback)
+                        if cmp.visible() then
+                            cmp.confirm( { select = true, behavior = cmp.ConfirmBehavior.Replace } )
+                        elseif luasnip.expandable() then
 							luasnip.expand()
 						elseif luasnip.expand_or_jumpable() then
 							luasnip.expand_or_jump()
@@ -129,57 +127,65 @@ return -- Autocompletion
 	},
 	{
 		"hrsh7th/cmp-buffer", -- buffer completions
-		event = "VeryLazy",
+        event = "VeryLazy",
         dependencies = "hrsh7th/nvim-cmp",
 	},
 	{
-		"hrsh7th/cmp-path", -- path completions
-		event = "VeryLazy",
+		"FelipeLema/cmp-async-path", -- path completions
+        event = "VeryLazy",
         dependencies = "hrsh7th/nvim-cmp",
 	},
 	{
 		"hrsh7th/cmp-cmdline", -- cmdline completions
-		event = "VeryLazy",
+        event = "VeryLazy",
         dependencies = "hrsh7th/nvim-cmp",
 	},
 	{
 		"hrsh7th/cmp-calc", -- math calculations completion
-		event = "VeryLazy",
+        event = "VeryLazy",
         dependencies = "hrsh7th/nvim-cmp",
 	},
 	{
 		"hrsh7th/cmp-nvim-lua", -- lua specific completions
-		event = "VeryLazy",
+        event = { "BufRead *.lua" },
         dependencies = "hrsh7th/nvim-cmp",
 	},
 	{
 		"hrsh7th/cmp-emoji", -- emoji completios
-		event = "VeryLazy",
+        event = "VeryLazy",
         dependencies = "hrsh7th/nvim-cmp",
 	},
 	{
 		"f3fora/cmp-spell", -- spelling completions
-		event = "VeryLazy",
+        event = "VeryLazy",
         dependencies = "hrsh7th/nvim-cmp",
 	},
 	{
 		"saadparwaiz1/cmp_luasnip", -- snippet completions
-		event = "VeryLazy",
-        dependencies = "hrsh7th/nvim-cmp",
-	},
-	{
-		"ray-x/cmp-treesitter", -- Treesitter completions
-		event = "VeryLazy",
+        event = { "BufRead *.lua" },
         dependencies = "hrsh7th/nvim-cmp",
 	},
 	{
 		"petertriho/cmp-git", -- github/gitlab completions
-		event = "VeryLazy",
+        event = "VeryLazy",
         dependencies = "hrsh7th/nvim-cmp",
 	},
 	{
 		"David-Kunz/cmp-npm", -- NPM dependencies manager
-		event = "VeryLazy",
+        event = "VeryLazy",
         dependencies = "hrsh7th/nvim-cmp",
+        config = function()
+            require("cmp-npm").setup()
+        end
 	},
+    {
+        "hrsh7th/cmp-nvim-lsp-document-symbol",
+        event = "VeryLazy",
+        dependencies = "nvim-cmp",
+    },
+    {
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        event = "VeryLazy",
+        dependencies = "nvim-cmp"
+    }
 }
