@@ -17,6 +17,7 @@ return -- Autocompletion
 				"hrsh7th/cmp-nvim-lsp-document-symbol",
 				"hrsh7th/cmp-nvim-lsp-signature-help",
 				"tamago324/cmp-zsh",
+				"ray-x/cmp-treesitter",
 			},
 		},
 		config = function()
@@ -49,6 +50,7 @@ return -- Autocompletion
 					{ name = "nvim_lsp_document_symbol" },
 					{ name = "copilot", max_item_count = 4 },
 					{ name = "luasnip", max_item_count = 10 },
+					{ name = "treesitter", max_item_count = 10 },
 					{ name = "calc" },
 					{ name = "buffer", keyword_length = 4, max_item_count = 10 },
 					{ name = "async_path" },
@@ -86,6 +88,7 @@ return -- Autocompletion
 							git = "[GIT]",
 							buffer = "[BUFFER]",
 							async_path = "[PATH]",
+							treesitter = "[TREE]",
 							calc = "[CALC]",
 							copilot = "[COPILOT]",
 							spell = "[SPELL]",
@@ -138,7 +141,7 @@ return -- Autocompletion
 						end
 					end, { "i", "s" }),
 				}),
-                sorting = require("cmp.config.default")().sorting,
+				sorting = require("cmp.config.default")().sorting,
 			})
 		end,
 	},
