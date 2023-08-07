@@ -10,6 +10,8 @@ return { -- Cargo.toml crates dependencies manager
 	end,
 	keys = function()
 		local wk = require("which-key")
+
+        -- stylua: ignore
 		wk.register({
 			name = "+rust",
 			c = {
@@ -18,10 +20,7 @@ return { -- Cargo.toml crates dependencies manager
 				f = { "<cmd>lua require('crates').show_features_popup()<CR>", "Show crate features" },
 				v = { "<cmd>lua require('crates').show_versions_popup()<CR>", "Show crate versions" },
 				d = { "<cmd>lua require('crates').show_dependencies_popup()<CR>", "Show crate dependencies" },
-				t = {
-					"<cmd>lua require('crates').expand_plain_crate_to_inline_table()<CR>",
-					"Current line crate into inline table",
-				},
+				t = { "<cmd>lua require('crates').expand_plain_crate_to_inline_table()<CR>", "Current line crate into inline table" },
 				T = { "<cmd>lua require('crates').extract_crate_into_table()<CR>", "Current line crate into table" },
 				u = { "<cmd>lua require('crates').upgrade_crate()<CR>", "Upgrade current crate" },
 				U = { "<cmd>lua require('crates').upgrade_all_crates()<CR>", "Upgrade all crates" },
@@ -35,6 +34,7 @@ return { -- Cargo.toml crates dependencies manager
 			},
 		}, { mode = "n", prefix = "<leader>ll" })
 
+        -- stylua: ignore
 		wk.register({
 			name = "+lsp",
             l = {

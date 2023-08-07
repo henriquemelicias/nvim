@@ -4,6 +4,7 @@ return {
 	keys = function()
 		local wk = require("which-key")
 
+        -- stylua: ignore
 		wk.register({
 			name = "+harpoon",
 			a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add file" },
@@ -20,6 +21,7 @@ return {
 			["9"] = { "<cmd> lua require('harpoon.ui').nav_file(9)<cr>", "File 9" },
 		}, { mode = "n", prefix = "<leader>h" })
 
+        -- stylua: ignore
         wk.register( {
 			["<C-n>"] = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Harpoon next file" },
 			["<C-p>"] = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Harpoon previous file" },

@@ -1,14 +1,9 @@
 return {
 	"rcarriga/nvim-notify",
 	event = "VeryLazy",
+    -- stylua: ignore
 	keys = {
-		{
-			"<leader>U",
-			function()
-				require("notify").dismiss({ silent = true, pending = true })
-			end,
-			desc = "Dismiss all Notifications",
-		},
+		{ "<leader>U", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Dismiss all Notifications" },
 	},
 	opts = {
 		timeout = 5000,

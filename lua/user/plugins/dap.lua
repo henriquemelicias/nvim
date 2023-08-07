@@ -5,6 +5,7 @@ return {
 		keys = function()
 			local wk = require("which-key")
 
+            -- stylua: ignore
 			wk.register({
 				["<F4>"] = { ":lua require('dapui').toggle( { reset = true } )<CR>", "Toggle DAP UI" },
 				["<F5>"] = { ":lua require('dapui').eval()<CR>", "DAP eval" },
@@ -15,10 +16,12 @@ return {
 				["<F9>"] = { ":lua require('dap').continue()<CR>", "DAP resume program" },
 			}, { mode = "n" })
 
+            -- stylua: ignore
 			wk.register({
 				["<F5>"] = { ":lua require('dapui').eval()<CR>", "DAP eval" },
 			}, { mode = { "n", "v" } })
 
+            -- stylua: ignore
 			wk.register({
 				d = {
 					name = "+debug",
@@ -32,10 +35,7 @@ return {
 						l = { "<cmd>lua require('dap').run_last()<CR>", "Run last" },
 					},
 					v = { "<cmd>lua require('dap.ui.widgets').hover()<CR>", "Variables hover" },
-					V = {
-						"<cmd>lua local widgets=require('dap.ui.widgets');widgets.centered_float(widgets.scopes)<CR>",
-						"Variables float",
-					},
+					V = { "<cmd>lua local widgets=require('dap.ui.widgets');widgets.centered_float(widgets.scopes)<CR>", "Variables float", },
 					r = {
 						name = "+repl",
 						o = { "<cmd>lua require('dap').repl.open()<CR>", "Open" },
@@ -43,14 +43,8 @@ return {
 					},
 					b = {
 						name = "+breakpoints",
-						c = {
-							"<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-							"Breakpoint Condition",
-						},
-						m = {
-							"<cmd>lua require('dap').set_breakpoint({ nil, nil, vim.fn.input('Log point message: ') })<CR>",
-							"Log Point Message",
-						},
+						c = { "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", "Breakpoint Condition", },
+						m = { "<cmd>lua require('dap').set_breakpoint({ nil, nil, vim.fn.input('Log point message: ') })<CR>", "Log Point Message", },
 						t = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Create" },
 					},
 				},

@@ -80,6 +80,7 @@ return {
 		keys = function()
 			local wk = require("which-key")
 
+            -- stylua: ignore
 			wk.register({
 				-- Telescope builtin.
 				f = {
@@ -91,15 +92,9 @@ return {
 					d = { ":Telescope diagnostics bufnr=0<CR>", "Diagnostics of this buffer" },
 					D = { ":Telescope diagnostics<CR>", "Diagnostics of workspace" },
 					f = { ":Telescope find_files<CR>", "Find files (root dir)" },
-					F = {
-						":lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })<CR>",
-						"Find files (cwd)",
-					},
+					F = { ":lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })<CR>", "Find files (cwd)" },
 					g = { ":Telescope live_grep<CR>", "Find with grep (root dir)" },
-					G = {
-						":lua require('telescope.builtin').live_grep( { cwd = vim.fn.expand('%:p:h') })<CR>",
-						"Find with grep (cwd)",
-					},
+					G = { ":lua require('telescope.builtin').live_grep( { cwd = vim.fn.expand('%:p:h') })<CR>", "Find with grep (cwd)" },
 					h = { ":Telescope help_tags<CR>", "Help tags" },
 					H = { ":Telescope highlights<CR>", "Highlights" },
 					l = { ":Telescope lsp_document_symbols<CR>", "LSP symbols goto (buffer)" },
@@ -108,10 +103,7 @@ return {
 					m = { ":Telescope man_pages<CR>", "Man pages" },
 					M = { ":Telescope marks<CR>", "Marks" },
 					o = { ":Telescope oldfiles<CR>", "Recent files" },
-					O = {
-						":lua require('telescope.builtin').oldfiles( { cwd = vim.fn.expand( '%:p:h' ) } )<CR>",
-						"Recent files (cwd)",
-					},
+					O = { ":lua require('telescope.builtin').oldfiles( { cwd = vim.fn.expand( '%:p:h' ) } )<CR>", "Recent files (cwd)" },
 					r = { ":Telescope resume<CR>", "Resume previous search" },
 					s = { ":Telescope current_buffer_fuzzy_find<CR>", "Find in current buffer" },
 					S = { ":Telescope search_history<CR>", "Search history" },
@@ -126,10 +118,7 @@ return {
 					n = { ":lua require('telescope').extensions.notify.notify()<CR>", "Notify messages" },
 					p = { ":Telescope project<CR>", "Projects" },
 					r = { ":Telescope repo list<CR>", "Switch between VCS repos" },
-					R = {
-						":lua require'telescope'.extensions.repo.list{search_dirs = {vim.fn.input('Directory to search: ')}}<CR>",
-						"Switch between VCS repos in dirs...",
-					},
+					R = { ":lua require'telescope'.extensions.repo.list{search_dirs = {vim.fn.input('Directory to search: ')}}<CR>", "Switch between VCS repos in dirs..." },
 					s = { ":Telescope luasnip<CR>", "Lua snippets" },
 					t = { ":Telescope telescope-tabs list_tabs<CR>", "Switch between tabs" },
 				},

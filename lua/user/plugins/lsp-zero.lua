@@ -56,20 +56,15 @@ return {
 					require("nvim-navic").attach(client, bufnr)
 				end
 
+                -- stylua: ignore
 				wk.register({
 					K = { "<cmd>lua vim.lsp.buf.hover()<cr>", "LSP display highlighted symbol info" },
 					g = {
 						name = "+Go To",
 						d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "LSP jump to definition of symbol" },
 						D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "LSP jump to symbol declaration" },
-						i = {
-							"<cmd>lua vim.lsp.buf.implementation()<CR>",
-							"LSP list implementations of symbol",
-						},
-						s = {
-							"<cmd>lua vim.lsp.buf.signature_help()<CR>",
-							"LSP signature info of symbol",
-						},
+						i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "LSP list implementations of symbol" },
+						s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "LSP signature info of symbol" },
 						l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "LSP diagnostics in float window" },
 					},
 					["<leader>l"] = {
@@ -90,10 +85,7 @@ return {
 						name = "+workspace",
 						a = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", "LSP add workspace folder" },
 						r = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", "LSP remove workspace folder" },
-						l = {
-							"<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-							"LSP list workspace folders",
-						},
+						l = { "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "LSP list workspace folders" },
 					},
 				}, { mode = "n", buffer = bufnr })
 			end)

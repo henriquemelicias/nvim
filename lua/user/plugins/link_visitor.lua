@@ -7,20 +7,11 @@ return {
 
 		link_visitor.setup()
 
+        -- stylua: ignore
 		wk.register({
 			p = {
-				l = {
-					function()
-						link_visitor.link_under_cursor()
-					end,
-					"Open link under cursor",
-				},
-				L = {
-					function()
-						link_visitor.link_near_cursor()
-					end,
-					"Open link near cursor",
-				},
+				l = { function() link_visitor.link_under_cursor() end, "Open link under cursor" },
+				L = { function() link_visitor.link_near_cursor() end, "Open link near cursor" },
 			},
 		}, { mode = "n", prefix = "<leader>" })
 	end,

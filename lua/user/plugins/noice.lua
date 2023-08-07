@@ -41,59 +41,19 @@ return {
 	keys = function()
 		local wk = require("which-key")
 
+        -- stylua: ignore
 		wk.register({
 			name = "+cmd",
-			l = {
-				function()
-					require("noice").cmd("last")
-				end,
-				"CMD last message",
-			},
-			h = {
-				function()
-					require("noice").cmd("history")
-				end,
-				"CMD history",
-			},
-			a = {
-				function()
-					require("noice").cmd("all")
-				end,
-				"CMD all",
-			},
-			d = {
-				function()
-					require("noice").cmd("dismiss")
-				end,
-				"CMD dismiss all",
-			},
+			l = { function() require("noice").cmd("last") end, "CMD last message", },
+			h = { function() require("noice").cmd("history") end, "CMD history", },
+			a = { function() require("noice").cmd("all") end, "CMD all", },
+			d = { function() require("noice").cmd("dismiss") end, "CMD dismiss all", },
 		}, { mode = "n", prefix = "<leader>c" })
 
+        -- stylua: ignore
 		return {
-			{
-				"<c-f>",
-				function()
-					if not require("noice.lsp").scroll(4) then
-						return "<c-f>"
-					end
-				end,
-				silent = true,
-				expr = true,
-				desc = "CMD scroll forward commands",
-				mode = { "i", "n", "s" },
-			},
-			{
-				"<c-b>",
-				function()
-					if not require("noice.lsp").scroll(-4) then
-						return "<c-b>"
-					end
-				end,
-				silent = true,
-				expr = true,
-				desc = "CMD scroll backward commands",
-				mode = { "i", "n", "s" },
-			},
+			{ "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "CMD scroll forward commands", mode = { "i", "n", "s" }, },
+			{ "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "CMD scroll backward commands", mode = { "i", "n", "s" }, },
 		}
 	end,
 }

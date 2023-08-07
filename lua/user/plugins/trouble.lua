@@ -5,8 +5,7 @@ return {
 	keys = {
 		{ "<leader>px", "<cmd>TroubleToggle document_diagnostics<CR>", desc = "Document diagnostics (Trouble)" },
 		{ "<leader>pX", "<cmd>TroubleToggle workspace_diagnostics<CR>", desc = "Workspace diagnostics (Trouble)" },
-		{
-			"[q",
+		{ "[q",
 			function()
 				if require("trouble").is_open() then
 					require("trouble").previous({ skip_groups = true, jump = true })

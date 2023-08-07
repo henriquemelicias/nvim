@@ -7,6 +7,7 @@ return {
 	keys = function()
 		local wk = require("which-key")
 
+        -- stylua: ignore
 		wk.register({
 			name = "+git",
 			l = { ":LazyGit<CR>", "Lazy git" },

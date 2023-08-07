@@ -24,6 +24,7 @@ return {
 	keys = function()
 		local wk = require("which-key")
 
+        -- stylua: ignore
 		wk.register({
 			p = {
 				c = { "<cmd>Copilot panel<CR>", "Copilot panel" },

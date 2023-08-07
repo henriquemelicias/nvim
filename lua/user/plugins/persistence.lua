@@ -6,26 +6,12 @@ return {
 	keys = function()
 		local wk = require("which-key")
 
+        -- stylua: ignore
 		wk.register({
 			name = "+session",
-			l = {
-				function()
-					require("persistence").load()
-				end,
-				"Restore session for current directory/project",
-			},
-			r = {
-				function()
-					require("persistence").load({ last = true })
-				end,
-				"Restore last session",
-			},
-			d = {
-				function()
-					require("persistence").stop()
-				end,
-				"Don't save current session",
-			},
+			l = { function() require("persistence").load() end, "Restore session for current directory/project" },
+			r = { function() require("persistence").load({ last = true }) end, "Restore last session" },
+			d = { function() require("persistence").stop() end, "Don't save current session" },
 		}, { mode = "n", prefix = "<leader>s" })
 	end,
 }

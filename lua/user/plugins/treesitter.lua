@@ -7,12 +7,39 @@ return {
 		{ "<c-space>", desc = "increment selection" },
 		{ "<bs", desc = "Decrement selection", mode = "x" },
 	},
+	config = function(_, opts)
+		require("nvim-treesitter.configs").setup(opts)
+	end,
 	opts = {
-		ensure_installed = "all",
+		-- Default installed. The others are automatically installed when needed.
+		auto_install = true,
+		ensure_installed = {
+			"bash",
+			"c",
+			"html",
+			"javascript",
+			"jsdoc",
+			"json",
+			"lua",
+			"luadoc",
+			"luap",
+			"markdown",
+			"markdown_inline",
+			"python",
+			"query",
+			"regex",
+			"rust",
+			"tsx",
+			"typescript",
+			"vim",
+			"vimdoc",
+			"yaml",
+		},
 		highlight = {
 			enable = true,
 			additional_vim_regex_highlighting = false,
 		},
+
 		autopairs = {
 			enable = true,
 		},

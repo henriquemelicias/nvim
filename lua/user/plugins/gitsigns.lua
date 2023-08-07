@@ -52,11 +52,13 @@ return {
 			local gs = require("gitsigns")
 			local wk = require("which-key")
 
+            -- stylua: ignore
 			wk.register({
 				["]h"] = { gs.next_hunk, "Next Hunk" },
 				["[h"] = { gs.prev_hunk, "Previous Hunk" },
 			}, { mode = "n", buffer = buffer })
 
+            -- stylua: ignore
 			wk.register({
 				name = "+git",
 				h = {
@@ -66,6 +68,7 @@ return {
 				},
 			}, { mode = { "n", "v" }, prefix = "<leader>g", buffer = buffer })
 
+            -- stylua: ignore
 			wk.register({
 				name = "+git",
 				h = {
@@ -74,22 +77,13 @@ return {
 					u = { gs.undo_stage_hunk, "Undo stage hunk" },
 					R = { gs.reset_buffer, "Reset buffer" },
 					p = { gs.preview_hunk, "Preview hunk" },
-					b = {
-						function()
-							gs.blame_line({ full = true })
-						end,
-						"Blame line",
-					},
+					b = { function() gs.blame_line({ full = true }) end, "Blame line", },
 					d = { gs.diffthis, "Diff this" },
-					D = {
-						function()
-							gs.diffthis("~")
-						end,
-						"Diff this ~",
-					},
+					D = { function() gs.diffthis("~") end, "Diff this ~", },
 				},
 			}, { mode = "n", prefix = "<leader>g", buffer = buffer })
 
+            -- stylua: ignore
 			wk.register({
 				name = "+git",
 				h = { ":<C-U>Gitsigns select_hunk<CR>", "Select hunk" },

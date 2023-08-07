@@ -50,57 +50,13 @@ return {
 	cmd = "Neotree",
 	branch = "v3.x",
 	dependencies = { "s1n7ax/nvim-window-picker" },
+    -- stylua: ignore
 	keys = {
-		{
-			"<leader>bb",
-			function()
-				require("neo-tree.command").execute({
-					toggle = true,
-					dir = get_root(),
-					position = "right",
-					source = "buffers",
-				})
-			end,
-			desc = "Neotree buffers",
-		},
-		{
-			"<leader>e",
-			function()
-				require("neo-tree.command").execute({
-					toggle = true,
-					dir = get_root(),
-					position = "right",
-					source = "document_symbols",
-				})
-			end,
-			desc = "Neotree document symbols",
-		},
-		{
-			"<leader>gn",
-			function()
-				require("neo-tree.command").execute({
-					toggle = true,
-					dir = get_root(),
-					position = "left",
-					source = "git_status",
-				})
-			end,
-			desc = "Neotree git status",
-		},
-		{
-			"<leader>q",
-			function()
-				require("neo-tree.command").execute({ toggle = true, dir = get_root(), position = "left" })
-			end,
-			desc = "Neotree explorer",
-		},
-		{
-			"<M-S-Q>",
-			function()
-				require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd(), position = "left" })
-			end,
-			desc = "Explorer NeoTree (cwd)",
-		},
+		{ "<leader>bb", function() require("neo-tree.command").execute({ toggle = true, dir = get_root(), position = "right", source = "buffers", }) end, desc = "Neotree buffers" },
+		{ "<leader>e", function() require("neo-tree.command").execute({ toggle = true, dir = get_root(), position = "right", source = "document_symbols", }) end, desc = "Neotree document symbols" },
+		{ "<leader>gn", function() require("neo-tree.command").execute({ toggle = true, dir = get_root(), position = "left", source = "git_status", }) end, desc = "Neotree git status" },
+		{ "<leader>q", function() require("neo-tree.command").execute({ toggle = true, dir = get_root(), position = "left" }) end, desc = "Neotree explorer" },
+		{ "<M-S-Q>", function() require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd(), position = "left" }) end, desc = "Explorer NeoTree (cwd)" },
 	},
 	deactivate = function()
 		vim.cmd([[Neotree position=left close]])

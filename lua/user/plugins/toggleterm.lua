@@ -1,22 +1,23 @@
 return {
-    'akinsho/toggleterm.nvim',
-    event = "VeryLazy",
-    version = "*",
-    config = true,
-    opts = {
-        on_open = function(term)
-            vim.cmd("startinsert!")
-            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
-            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-[>", "<cmd>close<CR>", {noremap = true, silent = true})
-            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<ESC>", "<cmd>close<CR>", {noremap = true, silent = true})
-        end,
-        start_in_insert = false,
-        autochdir = true,
-    },
-    keys = function ()
-        local wk = require( "which-key" )
-        local _ = require('toggleterm.terminal').Terminal
+	"akinsho/toggleterm.nvim",
+	event = "VeryLazy",
+	version = "*",
+	config = true,
+	opts = {
+		on_open = function(term)
+			vim.cmd("startinsert!")
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-[>", "<cmd>close<CR>", { noremap = true, silent = true })
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<ESC>", "<cmd>close<CR>", { noremap = true, silent = true })
+		end,
+		start_in_insert = false,
+		autochdir = true,
+	},
+	keys = function()
+		local wk = require("which-key")
+		local _ = require("toggleterm.terminal").Terminal
 
+        -- stylua: ignore
         wk.register( {
             t = {
                 name = "+terminal float",
@@ -49,11 +50,12 @@ return {
             },
         }, { mode = "n", prefix = "<leader>", noremap = true, silent = true })
 
+        -- stylua: ignore
         wk.register( {
             t = {
                 name = "+terminal",
                 v = { ":ToggleTermSendVisualSelection ", "Send selection to terminal <input>" },
             }
         }, { mode = "v", prefix = "<leader>", noremap = true, silent = true } )
-    end
+	end,
 }

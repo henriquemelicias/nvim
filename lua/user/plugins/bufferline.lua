@@ -40,20 +40,21 @@ return {
 	keys = function()
 		local wk = require("which-key")
 
+        -- stylua: ignore
 		wk.register({
 			name = "+bufferline",
-            c = {
-                name = "+close",
-                h = { ":BufferLineCloseLeft<CR>", "Close left buffers" },
-                l = { ":BufferLineCloseRight<CR>", "Close right buffers" },
-                o = { ":BufferLineCloseOthers<CR>", "Close the other buffers" },
-                d = { ":BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" }, -- Create/close tabs.
-            },
+			c = {
+				name = "+close",
+				h = { ":BufferLineCloseLeft<CR>", "Close left buffers" },
+				l = { ":BufferLineCloseRight<CR>", "Close right buffers" },
+				o = { ":BufferLineCloseOthers<CR>", "Close the other buffers" },
+				d = { ":BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" }, -- Create/close tabs.
+			},
 			g = { ":lua require('bufferline').go_to(vim.fn.input('Buffer number: '))<CR>", "Go to buffer ..." },
-            h = { ":bprevious<CR>", "Go to the previous buffer" },
-            l = { ":bnext<CR>", "Go the the next buffer" },
-            p = { ":BufferLineTogglePin<CR>", "Toggle buffer pin" },
-            n = { ":tabnew<CR>", "Create new buffer" },
+			h = { ":bprevious<CR>", "Go to the previous buffer" },
+			l = { ":bnext<CR>", "Go the the next buffer" },
+			p = { ":BufferLineTogglePin<CR>", "Toggle buffer pin" },
+			n = { ":tabnew<CR>", "Create new buffer" },
 			s = {
 				name = "+sort",
 				d = { ":BufferLineSortByDirectory<CR>", "Sort buffers by directory" },

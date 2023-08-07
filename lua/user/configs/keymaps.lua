@@ -27,10 +27,8 @@ keymap("n", "N", "Nzzzv", { noremap = true, silent = true })
 -- Normal --
 ------------
 
+-- stylua: ignore
 wk.register({
-	["<M-t>"] = {
-		name = "+Tabs",
-	},
 	-- Navigate buffers (tabs)
 	["<C-l>"] = { ":bnext<CR>", "Next tab" },
 	["<C-h>"] = { ":bprevious<CR>", "Previous tab" },
@@ -49,6 +47,7 @@ wk.register({
 	["<A-j>"] = { ":m .+1<CR>==", "Move selected text down" },
 }, { mode = "n" })
 
+-- stylua: ignore
 wk.register({
 	p = {
 		name = "+project",
@@ -61,6 +60,7 @@ wk.register({
 -- Visual --
 ------------
 
+-- stylua: ignore
 wk.register({
 	-- Move text up and down.
 	["<A-k>"] = { ":m .-2<CR>==", "Move selected text up" },
@@ -71,6 +71,7 @@ wk.register({
 -- Visual Block --
 ------------------
 
+-- stylua: ignore
 wk.register({
 	-- Move text up and down.
 	["<A-k>"] = { ":m '<-2<CR>gv=gv", "Move selected text up" },
@@ -81,6 +82,7 @@ wk.register({
 -- Terminal Mode --
 -------------------
 
+-- stylua: ignore
 wk.register({
 	-- Exit terminal mode easily.
 	["<ESC>"] = { "<C-\\><C-N>", "Exit terminal mode" },
