@@ -42,16 +42,18 @@ return {
 
 		wk.register({
 			name = "+bufferline",
-			p = { ":BufferLineTogglePin<CR>", "Toggle buffer pin" },
-			n = { ":tabnew<CR>", "Create new buffer" },
-			g = { ":BufferLineGoToBuffer ", "Go to buffer ..." },
-			c = {
-				name = "+close",
-				h = { ":BufferLineCloseLeft<CR>", "Close left buffers" },
-				l = { ":BufferLineCloseRight<CR>", "Close right buffers" },
-				o = { ":BufferLineCloseOthers<CR>", "Close the other buffers" },
-				d = { ":BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" }, -- Create/close tabs.
-			},
+            c = {
+                name = "+close",
+                h = { ":BufferLineCloseLeft<CR>", "Close left buffers" },
+                l = { ":BufferLineCloseRight<CR>", "Close right buffers" },
+                o = { ":BufferLineCloseOthers<CR>", "Close the other buffers" },
+                d = { ":BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" }, -- Create/close tabs.
+            },
+			g = { ":lua require('bufferline').go_to(vim.fn.input('Buffer number: '))<CR>", "Go to buffer ..." },
+            h = { ":bprevious<CR>", "Go to the previous buffer" },
+            l = { ":bnext<CR>", "Go the the next buffer" },
+            p = { ":BufferLineTogglePin<CR>", "Toggle buffer pin" },
+            n = { ":tabnew<CR>", "Create new buffer" },
 			s = {
 				name = "+sort",
 				d = { ":BufferLineSortByDirectory<CR>", "Sort buffers by directory" },
@@ -59,8 +61,6 @@ return {
 				r = { ":BufferLineSortByRelativeDirectory<CR>", "Sort buffers by relative dir" },
 				t = { ":BufferLineSortByTabs<CR>", "Sort buffers by tabs" },
 			},
-			h = { ":bprevious<CR>", "Go to the previous buffer" },
-			l = { ":bnext<CR>", "Go the the next buffer" },
 			["1"] = { ":BufferLineGoToBuffer 1<CR>", "Go to buffer 1" },
 			["2"] = { ":BufferLineGoToBuffer 2<CR>", "Go to buffer 2" },
 			["3"] = { ":BufferLineGoToBuffer 3<CR>", "Go to buffer 3" },

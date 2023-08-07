@@ -1,6 +1,6 @@
 local M = {}
 
-function M.tsserver_handler()
+function M.handler()
 
     local typescript = require( "typescript" )
     local ih = require( "inlay-hints" )

@@ -34,7 +34,7 @@ M.LSP_SERVERS = {
     "docker_compose_language_service",  -- Docker Compose
     "eslint",                           -- ESlint
     "golangci_lint_ls",                 -- Go
-    "html",                             -- HTML
+--    "html",                             -- HTML
     "ltex",                             -- LaTeX
     "lua_ls",                           -- Lua
     "kotlin_language_server",           -- Kotlin
@@ -44,11 +44,11 @@ M.LSP_SERVERS = {
     "marksman",                         -- Markdown
     "pyright",                          -- Python
     "pylsp",                            -- Python (docs)
-    "rust_analyzer",                    -- Rust
+--    "rust_analyzer",                    -- Rust
     "sqlls",                            -- SQL
     "svelte",                           -- Svelte
     "taplo",                            -- TOML
-    "tailwindcss",                      -- Tailwind CSS
+ --   "tailwindcss",                      -- Tailwind CSS
     "lemminx",                          -- XML
     "yamlls",                           -- Yaml
 }
@@ -57,7 +57,7 @@ M.LSP_SERVERS = {
 M.DAP_DEBUGGERS = {
     "codelldb",                         -- C/C++/Rust/Swift
     "bash-debug-adapter",               -- Bash
-    "debugpy",                          -- Python
+--    "debugpy",                          -- Python
 }
 
 -- Files to open on an IDE-like environment.

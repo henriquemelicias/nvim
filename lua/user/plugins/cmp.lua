@@ -4,13 +4,24 @@ return -- Autocompletion
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			{ "L3MON4D3/LuaSnip" },
+			{
+				"L3MON4D3/LuaSnip",
+				"hrsh7th/cmp-buffer",
+				"FelipeLema/cmp-async-path",
+				"hrsh7th/cmp-cmdline",
+				"hrsh7th/cmp-calc",
+				"f3fora/cmp-spell",
+				"saadparwaiz1/cmp_luasnip",
+				"petertriho/cmp-git",
+				"David-Kunz/cmp-npm",
+				"hrsh7th/cmp-nvim-lsp-document-symbol",
+				"hrsh7th/cmp-nvim-lsp-signature-help",
+				"tamago324/cmp-zsh",
+			},
 		},
 		config = function()
-			-- Here is where you configure the autocompletion settings.
 			require("lsp-zero").extend_cmp()
 
-			-- And you can configure cmp even more, if you want to.
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 
@@ -19,24 +30,28 @@ return -- Autocompletion
 				return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 			end
 
+			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
 			cmp.setup({
+				completion = {
+					completeopt = "menu,menuone,noinsert,noselect",
+				},
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
 					end,
 				},
 				sources = {
-					{ name = "crates", group_index = 1 },
-					{ name = "npm", group_index = 1, keyword_length = 4 },
-					{ name = "nvim_lsp", group_index = 2 },
-					{ name = "nvim_lsp_signature_help", group_index = 2 },
-					{ name = "nvim_lua", group_index = 2 },
-					{ name = "calc", group_index = 2 },
-					{ name = "luasnip", group_index = 2, max_item_count = 10 },
-					{ name = "copilot", group_index = 2, max_item_count = 4 },
-					{ name = "buffer", group_index = 2, keyword_length = 4, max_item_count = 10 },
-					{ name = "async_path", group_index = 2 },
-					{ name = "emoji", group_index = 2 },
+					{ name = "crates" },
+					{ name = "npm", keyword_length = 4 },
+					{ name = "nvim_lsp" },
+					{ name = "nvim_lsp_signature_help" },
+					{ name = "nvim_lsp_document_symbol" },
+					{ name = "copilot", max_item_count = 4 },
+					{ name = "luasnip", max_item_count = 10 },
+					{ name = "calc" },
+					{ name = "buffer", keyword_length = 4, max_item_count = 10 },
+					{ name = "async_path" },
 					{
 						name = "spell",
 						option = {
@@ -45,7 +60,6 @@ return -- Autocompletion
 								return true
 							end,
 						},
-						group_index = 2,
 						keyword_length = 5,
 						max_item_count = 3,
 					},
@@ -61,7 +75,6 @@ return -- Autocompletion
 				formatting = {
 					fields = { "abbr", "kind", "menu" },
 					format = function(entry, vim_item)
-						-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 						vim_item.menu = ({
 							crates = "[CRATES]",
 							npm = "[NPM]",
@@ -72,17 +85,20 @@ return -- Autocompletion
 							luasnip = "[LUASNIP]",
 							git = "[GIT]",
 							buffer = "[BUFFER]",
-							treesitter = "[TREE]",
 							async_path = "[PATH]",
 							calc = "[CALC]",
 							copilot = "[COPILOT]",
 							spell = "[SPELL]",
-							emoji = "[EMOJI]",
 							zsh = "[ZSH]",
 						})[entry.source.name]
 
 						return vim_item
 					end,
+				},
+				experimental = {
+					ghost_text = {
+						hl_group = "CmpGhostText",
+					},
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -101,10 +117,10 @@ return -- Autocompletion
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = false,
 					}),
-					["<Tab>"] = cmp.mapping( function(fallback)
-                        if cmp.visible() then
-                            cmp.confirm( { select = true, behavior = cmp.ConfirmBehavior.Replace } )
-                        elseif luasnip.expandable() then
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace })
+						elseif luasnip.expandable() then
 							luasnip.expand()
 						elseif luasnip.expand_or_jumpable() then
 							luasnip.expand_or_jump()
@@ -122,70 +138,22 @@ return -- Autocompletion
 						end
 					end, { "i", "s" }),
 				}),
+                sorting = require("cmp.config.default")().sorting,
 			})
 		end,
 	},
 	{
-		"hrsh7th/cmp-buffer", -- buffer completions
-        event = "VeryLazy",
-        dependencies = "hrsh7th/nvim-cmp",
+		"roobert/tailwindcss-colorizer-cmp.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("tailwindcss-colorizer-cmp").setup({
+				color_square_width = 2,
+			})
+
+			require("cmp").config.formatting = {
+				format = require("tailwindcss-colorizer-cmp").formatter,
+			}
+		end,
+		dependencies = "nvim-cmp",
 	},
-	{
-		"FelipeLema/cmp-async-path", -- path completions
-        event = "VeryLazy",
-        dependencies = "hrsh7th/nvim-cmp",
-	},
-	{
-		"hrsh7th/cmp-cmdline", -- cmdline completions
-        event = "VeryLazy",
-        dependencies = "hrsh7th/nvim-cmp",
-	},
-	{
-		"hrsh7th/cmp-calc", -- math calculations completion
-        event = "VeryLazy",
-        dependencies = "hrsh7th/nvim-cmp",
-	},
-	{
-		"hrsh7th/cmp-nvim-lua", -- lua specific completions
-        event = { "BufRead *.lua" },
-        dependencies = "hrsh7th/nvim-cmp",
-	},
-	{
-		"hrsh7th/cmp-emoji", -- emoji completios
-        event = "VeryLazy",
-        dependencies = "hrsh7th/nvim-cmp",
-	},
-	{
-		"f3fora/cmp-spell", -- spelling completions
-        event = "VeryLazy",
-        dependencies = "hrsh7th/nvim-cmp",
-	},
-	{
-		"saadparwaiz1/cmp_luasnip", -- snippet completions
-        event = { "BufRead *.lua" },
-        dependencies = "hrsh7th/nvim-cmp",
-	},
-	{
-		"petertriho/cmp-git", -- github/gitlab completions
-        event = "VeryLazy",
-        dependencies = "hrsh7th/nvim-cmp",
-	},
-	{
-		"David-Kunz/cmp-npm", -- NPM dependencies manager
-        event = "VeryLazy",
-        dependencies = "hrsh7th/nvim-cmp",
-        config = function()
-            require("cmp-npm").setup()
-        end
-	},
-    {
-        "hrsh7th/cmp-nvim-lsp-document-symbol",
-        event = "VeryLazy",
-        dependencies = "nvim-cmp",
-    },
-    {
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-        event = "VeryLazy",
-        dependencies = "nvim-cmp"
-    }
 }

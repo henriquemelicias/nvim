@@ -52,7 +52,7 @@ wk.register({
 wk.register({
 	p = {
 		name = "+project",
-		x = { ":Ex<CR>", "View file explorer mode in current dir" },
+		e = { ":Ex<CR>", "View file explorer mode in current dir" },
 		r = { ":let @+ = getcwd()<CR>", "Root dir path to clipboard" },
 	},
 }, { mode = "n", prefix = "<leader>" })

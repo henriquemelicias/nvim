@@ -6,6 +6,12 @@ return {
 		lazy = true,
 		config = false,
 	},
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			{ "hrsh7th/cmp-nvim-lsp" },
+		},
+	},
 	-- null-ls
 	{
 		"jose-elias-alvarez/null-ls.nvim",
@@ -34,6 +40,8 @@ return {
 		},
 		config = function()
 			-- This is where all the LSP shenanigans will live
+			local lsp = require("lsp-zero").preset()
+			local wk = require("which-key")
 
 			require("inlay-hints").setup({
 				only_current_line = true,
@@ -41,9 +49,6 @@ return {
 					right_align = true,
 				},
 			})
-
-			local lsp = require("lsp-zero").preset()
-			local wk = require("which-key")
 
 			lsp.on_attach(function(client, bufnr)
 				-- Navic
@@ -100,7 +105,24 @@ return {
 					timeout_ms = 10000,
 				},
 				servers = {
-					["null-ls"] = { "javascript", "typescript", "lua" },
+					["null-ls"] = {
+						"css",
+						"graphql",
+						"html",
+						"javascript",
+						"javascriptreact",
+						"json",
+						"less",
+						"lua",
+						"markdown",
+						"scss",
+						"sh",
+						"svelte",
+						"typescript",
+						"typescriptreact",
+						"vue",
+						"yaml",
+					},
 				},
 			})
 
@@ -118,9 +140,10 @@ return {
 				ensure_installed = require("user.configs.settings").LSP_SERVERS,
 				handlers = {
 					lsp.default_setup,
-					lua_ls = require("user.languages.lua").lua_ls_handler(lsp),
-					rust_analyzer = require("user.languages.rust").rust_analyzer_handler(),
-					tsserver = require("user.languages.typescript").tsserver_handler(),
+					lua_ls = require("user.languages.lua").handler(lsp),
+					rust_analyzer = require("user.languages.rust").handler(),
+					tsserver = require("user.languages.typescript").handler(),
+					tailwindcss = require("user.languages.tailwindcss").handler(lsp),
 				},
 			})
 
@@ -144,11 +167,13 @@ return {
 							"yaml",
 						},
 					}),
+					null_ls.builtins.formatting.shfmt,
 					null_ls.builtins.formatting.stylua.with({
 						filetypes = {
 							"lua",
 						},
 					}),
+					null_ls.builtins.formatting.sqlformat,
 					null_ls.builtins.diagnostics.eslint.with({
 						filetypes = {
 							"css",
@@ -158,16 +183,5 @@ return {
 				},
 			})
 		end,
-	},
-	-- LANGUAGE PLUGINS --
-	-- RUST TOOLS
-	{
-		"simrat39/rust-tools.nvim",
-		lazy = true,
-	},
-	-- Typescript
-	{
-		"jose-elias-alvarez/typescript.nvim",
-		lazy = true,
 	},
 }

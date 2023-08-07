@@ -1,5 +1,6 @@
 local ICONS = require("user.configs.settings").ICONS
 local root_patterns = { ".git", "lua" }
+
 -- Return the root directory based on:
 -- * lsp workspace folders
 -- * lsp root_dir
@@ -130,9 +131,7 @@ return {
 			{
 				event = "neo_tree_buffer_enter",
 				handler = function(_)
-					vim.cmd([[
-                    setlocal relativenumber
-                    ]])
+					vim.cmd([[ setlocal relativenumber ]])
 				end,
 			},
 		},
