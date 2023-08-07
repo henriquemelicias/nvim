@@ -9,6 +9,10 @@ return {
 			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
 			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-[>", "<cmd>close<CR>", { noremap = true, silent = true })
 			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<ESC>", "<cmd>close<CR>", { noremap = true, silent = true })
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-h>", "<nop>", { noremap = true, silent = true })
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-j>", "<nop>", { noremap = true, silent = true })
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-n>", "<nop>", { noremap = true, silent = true })
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-p>", "<nop>", { noremap = true, silent = true })
 		end,
 		start_in_insert = false,
 		autochdir = true,

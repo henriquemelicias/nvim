@@ -9,11 +9,15 @@ return {
 
         -- stylua: ignore
         wk.register( {
-            ["<leader>"] = { name = "+Leader" },
             ["<C-w>"] = { name = "+Window" },
 	        ["<M-t>"] = { name = "+Tabs" },
             ["["] = { name = "+Previous" },
             ["]"] = { name = "+Next" },
+            ["g"] = { namea = "+Goto" },
+            ["<leader>"] = { name = "+Leader" },
+            ["<leader>l"] = { name = "+lsp" },
+            ["<leader>x"] = { name = "+test (eXperiment)" },
+            ["<leader>pw"] = { name = "+workspace" }
         } )
 	end,
 	opts = {

@@ -1,0 +1,8 @@
+unstable_features = true
+fn_single_line = true
+spaces_within_parenthesized_items = true
+max_width = 120
+imports_granularity = "Crate"
+enum_discrim_align_threshold = 20
+struct_field_align_threshold = 20
+use_small_heuristics = "Default"

@@ -6,15 +6,15 @@ M.BACKUP_DIR = (os.getenv("XDG_STATE_HOME") or "../..") .. "/nvim/backup"
 -- WORKSPACES --
 -- Used by the telescope find by frecency algorithm.
 M.WORKSPACES_DIRS = {
-    ["home"]            = vim.env.HOME,
-    ["home-config"]     = vim.env.HOME .. "/.config",
-    ["home-data"]       = vim.env.HOME .. "/.local/share",
-    ["home-projects"]   = vim.env.HOME .. "/Programming/Projects",
-    ["home-challenges"] = vim.env.HOME .. "/Programming/Challenges",
-    ["home-study"]      = vim.env.HOME .. "/Study",
-    ["home-runnables"]  = vim.env.HOME .. "/Runnables",
-    ["home-temporary"]  = vim.env.HOME .. "/Temporary",
-    ["home-other"]      = vim.env.HOME .. "/Other"
+    --["home"]            = vim.env.HOME,
+    --["home-config"]     = vim.env.HOME .. "/.config",
+    --["home-data"]       = vim.env.HOME .. "/.local/share",
+    --["home-projects"]   = vim.env.HOME .. "/Programming/Projects",
+    --["home-challenges"] = vim.env.HOME .. "/Programming/Challenges",
+    --["home-study"]      = vim.env.HOME .. "/Study",
+    --["home-runnables"]  = vim.env.HOME .. "/Runnables",
+    --["home-temporary"]  = vim.env.HOME .. "/Temporary",
+    --["home-other"]      = vim.env.HOME .. "/Other"
 }
 
 -- REPOS --
@@ -23,41 +23,53 @@ M.REPOS_DIRS = {
     vim.env.HOME,
 }
 
+M.MASON_ENSURE_INSTALLED = {
 -- LSP SERVERS --
-M.LSP_SERVERS = {
-    "bashls",                           -- Bash
+    "asm-lsp",                          -- Assembly
+    "bash-language-server",             -- Bash
+    "buf-language-server",              -- Protobuf
     "clangd",                           -- C/C++
-    "cmake",                            -- CMake
-    "csharp_ls",                        -- C#
-    "cssls",                            -- CSS
-    "dockerls",                         -- Docker
-    "docker_compose_language_service",  -- Docker Compose
-    "eslint",                           -- ESlint
-    "golangci_lint_ls",                 -- Go
---    "html",                             -- HTML
-    "ltex",                             -- LaTeX
-    "lua_ls",                           -- Lua
-    "kotlin_language_server",           -- Kotlin
-    "tsserver",                         -- Javascript
+    "clojure-lsp",                      -- Clojure
+    "cmake-language-server",            -- CMake
+    "csharp-language-server",           -- C#
+    "css-lsp",                          -- CSS
+    "cssmodules-language-server",       -- CSS Modules
+    "dockerfile-language-server",       -- Docker
+    "docker-compose-language-service",  -- Docker Compose
+    "eslint-lsp",                       -- ESlint
+    "gopls",                            -- Go
+    "gradle-language-server",           -- Gradle
+    "graphql-language-service-cli",     -- GraphQL
+    "haskell-language-server",          -- Haskell
+    "html-lsp",                         -- HTML
     "jdtls",                            -- Java
-    "jsonls",                           -- Json
+    "json-lsp",                         -- Json
+    "kotlin-language-server",           -- Kotlin
+    "lua-language-server",              -- Lua
     "marksman",                         -- Markdown
+    "nginx-language-server",            -- Nginx
+    "ocaml-lsp",                        -- OCaml
+    "pkgbuild-language-server",         -- Pkgbuild
     "pyright",                          -- Python
-    "pylsp",                            -- Python (docs)
---    "rust_analyzer",                    -- Rust
+    "rust-analyzer",                    -- Rust
     "sqlls",                            -- SQL
-    "svelte",                           -- Svelte
+    "svelte-language-server",           -- Svelte
+    "tailwindcss-language-server",      -- Tailwind CSS
     "taplo",                            -- TOML
- --   "tailwindcss",                      -- Tailwind CSS
+    "texlab",                           -- LaTeX
+    "typescript-language-server",       -- Typescript/JavaScript
     "lemminx",                          -- XML
-    "yamlls",                           -- Yaml
-}
+    "yaml-language-server",             -- Yaml
+    "zls",                              -- Zig
 
 -- DAP DEBUGGERS --
-M.DAP_DEBUGGERS = {
     "codelldb",                         -- C/C++/Rust/Swift
     "bash-debug-adapter",               -- Bash
---    "debugpy",                          -- Python
+    "debugpy",                          -- Python
+    "go-debug-adapter",                 -- Go
+    "java-debug-adapter",               -- Java
+    "js-debug-adapter",                 -- Javascript
+    "kotlin-debug-adapter",             -- Kotlin
 }
 
 -- Files to open on an IDE-like environment.
