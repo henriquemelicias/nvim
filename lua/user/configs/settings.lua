@@ -23,10 +23,10 @@ M.REPOS_DIRS = {
     vim.env.HOME,
 }
 
+-- This is only for languages that still do not have a language config lua file in "user.configs.languages"
 M.MASON_ENSURE_INSTALLED = {
 -- LSP SERVERS --
     "asm-lsp",                          -- Assembly
-    "bash-language-server",             -- Bash
     "buf-language-server",              -- Protobuf
     "clangd",                           -- C/C++
     "clojure-lsp",                      -- Clojure
@@ -51,7 +51,6 @@ M.MASON_ENSURE_INSTALLED = {
     "ocaml-lsp",                        -- OCaml
     "pkgbuild-language-server",         -- Pkgbuild
     "pyright",                          -- Python
-    "rust-analyzer",                    -- Rust
     "sqlls",                            -- SQL
     "svelte-language-server",           -- Svelte
     "tailwindcss-language-server",      -- Tailwind CSS
@@ -63,8 +62,6 @@ M.MASON_ENSURE_INSTALLED = {
     "zls",                              -- Zig
 
 -- DAP DEBUGGERS --
-    "codelldb",                         -- C/C++/Rust/Swift
-    "bash-debug-adapter",               -- Bash
     "debugpy",                          -- Python
     "go-debug-adapter",                 -- Go
     "java-debug-adapter",               -- Java
@@ -87,7 +84,7 @@ M.SPELL_FILE_PATTERNS = {
 
 M.ICONS = {
     DAP = {
-        Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+        Stopped = { " ", "DiagnosticWarn", "DapStoppedLine" },
         Breakpoint = " ",
         BreakpointCondition = " ",
         BreakpointRejected = { " ", "DiagnosticError" },

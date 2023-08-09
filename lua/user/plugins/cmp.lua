@@ -170,16 +170,16 @@ return -- Autocompletion
 		}
 	end,
     config = function(_, opts)
-            local cmp = require("cmp")
+        local cmp = require("cmp")
 
-            cmp.setup(opts)
+        cmp.setup(opts)
 
 		-- Search completion.
-		cmp.setup.cmdline({ "/" }, {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
-				{ name = "buffer" },
-			},
-		})
+	--	cmp.setup.cmdline({ "/" }, {
+	--		mapping = cmp.mapping.preset.cmdline(),
+	--		sources = {
+	--			{ name = "buffer" },
+	--		},
+	--	})
     end
 }

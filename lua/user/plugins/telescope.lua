@@ -82,6 +82,7 @@ return {
 
             -- stylua: ignore
 			wk.register({
+				["<leader>"] = { ":Telescope resume<CR>", "Resume previous telescope" },
 				-- Telescope builtin.
 				f = {
 					name = "+telescope",
@@ -102,9 +103,8 @@ return {
 					k = { ":Telescope keymaps<CR>", "Keymaps" },
 					m = { ":Telescope man_pages<CR>", "Man pages" },
 					M = { ":Telescope marks<CR>", "Marks" },
-					o = { ":Telescope oldfiles<CR>", "Recent files" },
-					O = { ":lua require('telescope.builtin').oldfiles( { cwd = vim.fn.expand( '%:p:h' ) } )<CR>", "Recent files (cwd)" },
-					r = { ":Telescope resume<CR>", "Resume previous search" },
+					r = { ":Telescope oldfiles<CR>", "Recent files" },
+					R = { ":lua require('telescope.builtin').oldfiles( { cwd = vim.fn.expand( '%:p:h' ) } )<CR>", "Recent files (cwd)" },
 					s = { ":Telescope current_buffer_fuzzy_find<CR>", "Find in current buffer" },
 					S = { ":Telescope search_history<CR>", "Search history" },
 				},

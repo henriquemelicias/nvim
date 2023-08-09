@@ -9,6 +9,12 @@ local OPTIONS = {
         SETTINGS.BACKUP_DIR
     },
     mouse = "a",            -- allow mouse to be used in Neovim
+    sessionoptions = {      -- options when saving and restoring a session
+        "buffers",
+        "curdir",
+        "tabpages",
+        "winsize",
+    },
     swapfile = false,       -- creates a swap file
     timeoutlen = 500,       -- time to wait for a mapped sequence to complete (in ms)
     undofile = true,        -- enable persistent undo
@@ -69,6 +75,7 @@ local OPTIONS = {
     sidescrolloff = 8,      -- minimal number of screen lines to keep right/left cursor
     splitbelow = true,      -- force all horizontal splits to go below current window
     splitright = true,      -- force all vertical splits to got to the right of window
+    wildmode = "longest:full,full", -- command-line completion mode
 
     -- Indent and wrap lines --
     autoindent = true,      -- copy indent from current line when starting a new line

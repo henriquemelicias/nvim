@@ -9,7 +9,7 @@ return {
         -- stylua: ignore
 		wk.register({
 			name = "+session",
-			l = { function() require("persistence").load() end, "Restore session for current directory/project" },
+			l = { function() require("persistence").load() end, "Restore session for current directory" },
 			r = { function() require("persistence").load({ last = true }) end, "Restore last session" },
 			d = { function() require("persistence").stop() end, "Don't save current session" },
 		}, { mode = "n", prefix = "<leader>s" })

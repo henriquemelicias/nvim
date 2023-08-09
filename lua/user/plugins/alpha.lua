@@ -13,6 +13,7 @@ return {
 			[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
 			[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
 		}
+    -- stylua: ignore
 		dashboard.section.buttons.val = {
 			dashboard.button("e", " " .. " New file", ":ene <BAR> startinsert <CR>"),
 			dashboard.button("SPC f f", " " .. " Find file", ":Telescope find_files <CR>"),
@@ -21,11 +22,8 @@ return {
 			dashboard.button("SPC F f", " " .. " Frecency/MRU", ":Telescope frecency <CR>"),
 			dashboard.button("SPC F p", " " .. " Projects", ":Telescope project<CR>"),
 			dashboard.button("SPC F r", " " .. " Git Repos", ":Telescope repo<CR>"),
-			dashboard.button(
-				"SPC s r",
-				" " .. " Restore last session",
-				[[:lua require("persistence").load({ last = true }) <cr>]]
-			),
+			dashboard.button("SPC s r", " " .. " Restore last session", [[:lua require("persistence").load({ last = true }) <cr>]]),
+            dashboard.button("SPC U l", " ⏾" .. " Lazy", ":Lazy<CR>"),
 			dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
 			dashboard.button("q", " " .. " Quit", ":qa<CR>"),
 		}

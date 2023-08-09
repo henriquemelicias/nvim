@@ -3,7 +3,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-        { "folke/neodev.nvim", opts = {} },
+        { "folke/neodev.nvim", opts = { plugins = { "neotest" }, types = true } },
         "mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
@@ -79,6 +79,7 @@ return {
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
+
         local Util = require("user.utils")
         -- Neoconf.
         local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]

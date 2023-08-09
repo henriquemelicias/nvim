@@ -140,6 +140,7 @@ return {
 				["<F8>"] = { ":lua require('dap').step_over()<CR>", "DAP step over" },
 				["<S-F8>"] = { ":lua require('dap').step_out()<CR>", "DAP step out" },
 				["<F9>"] = { ":lua require('dap').continue()<CR>", "DAP resume program" },
+				["<F10>"] = { ":lua require('dap').close()<CR>", "DAP close program" },
 			}, { mode = "n" })
 
             -- stylua: ignore
@@ -152,17 +153,18 @@ return {
 				d = {
 					name = "+debug",
 					s = {
-						name = "+step/run",
+						name = "+step",
 						c = { "<cmd>lua require('dap').continue()<CR>", "Continue" },
 						v = { "<cmd>lua require('dap').step_over()<CR>", "Step Over" },
 						i = { "<cmd>lua require('dap').step_into()<CR>", "Step Into" },
 						o = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
-						r = { "<cmd>lua require('dap').run_to_cursor()<CR>", "Run to cursor" },
-						l = { "<cmd>lua require('dap').run_last()<CR>", "Run last" },
 					},
+					r = { "<cmd>lua require('dap').run_to_cursor()<CR>", "Run to cursor" },
+					l = { "<cmd>lua require('dap').run_last()<CR>", "Run last" },
+                    t = { function() require("neotest").run.run({strategy = "dap"}) end, "Debug nearest test" },
 					v = { "<cmd>lua require('dap.ui.widgets').hover()<CR>", "Variables hover" },
 					V = { "<cmd>lua local widgets=require('dap.ui.widgets');widgets.centered_float(widgets.scopes)<CR>", "Variables float", },
-					r = {
+					R = {
 						name = "+repl",
 						o = { "<cmd>lua require('dap').repl.open()<CR>", "Open" },
 						l = { "<cmd>lua require('dap').repl.run_last()<CR>", "Run Last" },

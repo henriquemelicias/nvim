@@ -31,9 +31,6 @@ function M.get()
             { "<leader>lf", format, desc = "Format range", mode = "v", has = "rangeFormatting" },
             { "<leader>lk", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
             { "<leader>lr", vim.lsp.buf.references, desc = "List symbol references" },
-            { "<leader>pwa",vim.lsp.buf.add_workspace_folder, desc = "Add folder" },
-            { "<leader>pwr",vim.lsp.buf.remove_workspace_folder, desc = "Remove folder" },
-            { "<leader>pwl",vim.lsp.buf.list_workspace_folders, desc = "List folders" },
         }
 		M._keys[#M._keys + 1] = { "<leader>lR", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
 	end

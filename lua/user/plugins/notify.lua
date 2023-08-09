@@ -3,7 +3,7 @@ return {
 	event = "VeryLazy",
     -- stylua: ignore
 	keys = {
-		{ "<leader>U", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Dismiss all Notifications" },
+		{ "<leader>Un", function() require("notify").dismiss({ silent = true, pending = true }) end, desc = "Dismiss all notifications" },
 	},
 	opts = {
 		timeout = 5000,

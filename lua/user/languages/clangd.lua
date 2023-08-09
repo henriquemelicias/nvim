@@ -96,6 +96,7 @@ return {
 			},
 			setup = {
 				clangd = function(_, opts)
+                    require("which-key").register( { ["<leader>l"] = { name = "+lsp", l = { name = "+C/C++" } } } )
 					local clangd_ext_opts = require("user.utils").opts("clangd_extensions.nvim")
 					require("clangd_extensions").setup(
 						vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts })
