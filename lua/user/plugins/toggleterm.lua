@@ -2,7 +2,6 @@ return {
 	"akinsho/toggleterm.nvim",
 	event = "VeryLazy",
 	version = "*",
-	config = true,
 	opts = {
 		on_open = function(term)
 			vim.cmd("startinsert!")
@@ -14,6 +13,7 @@ return {
 			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-n>", "<nop>", { noremap = true, silent = true })
 			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<C-p>", "<nop>", { noremap = true, silent = true })
 		end,
+        hide_numbers = false,
 		start_in_insert = false,
 		autochdir = true,
 	},

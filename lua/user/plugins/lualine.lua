@@ -57,8 +57,8 @@ return {
 				theme = "auto",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
-				disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
-				ignore_focus = {},
+				disabled_filetypes = { "alpha", "dashboard", "neo-tree", "Outline", "undotree", "diff" },
+				ignore_focus = { "toggleterm" },
 				always_divide_middle = true,
 				globalstatus = false,
 				refresh = {

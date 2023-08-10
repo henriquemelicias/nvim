@@ -43,12 +43,12 @@ return {
 					},
 					hover_actions = {
 						auto_focus = true,
-                        border = "rounded"
+						border = "rounded",
 					},
-                    reload_workspace_from_cargo_toml = true,
-                    runnables = {
-                        use_telescope = true,
-                    },
+					reload_workspace_from_cargo_toml = true,
+					runnables = {
+						use_telescope = true,
+					},
 				},
 
 				server = {
@@ -61,6 +61,7 @@ return {
 								a = { rust_tools.hover_actions.hover_actions, "Hover actions" },
 								d = { rust_tools.debuggables.debuggables, "Debuggables" },
 								D = { ":RustLastDebug<CR>", "Last debuggable" },
+								e = { ":RustOpenExternalDocs<CR>", "Open crate (E)xternal docs" },
 								h = { rust_tools.inlay_hints.enable, "Enable inlay hints" },
 								H = { rust_tools.inlay_hints.disable, "Disable inlay hints" },
 								r = { rust_tools.runnables.runnables, "Runnables" },
@@ -69,34 +70,6 @@ return {
 								m = { rust_tools.expand_macro.expand_macro, "Expand macro" },
 								c = { rust_tools.open_cargo_toml.open_cargo_toml, "Open cargo.toml" },
 								p = { rust_tools.parent_module.parent_module, "Go to parent module" },
-								s = { ":RustSSR<CR>", "Structural search and replace" },
-							},
-							c = {
-								name = "+crates",
-								c = { "<cmd>lua require('crates').show_popup()<CR>", "Show crate info" },
-								f = { "<cmd>lua require('crates').show_features_popup()<CR>", "Show crate features" },
-								v = { "<cmd>lua require('crates').show_versions_popup()<CR>", "Show crate versions" },
-								d = {
-									"<cmd>lua require('crates').show_dependencies_popup()<CR>",
-									"Show crate dependencies",
-								},
-								t = {
-									"<cmd>lua require('crates').expand_plain_crate_to_inline_table()<CR>",
-									"Current line crate into inline table",
-								},
-								T = {
-									"<cmd>lua require('crates').extract_crate_into_table()<CR>",
-									"Current line crate into table",
-								},
-								u = { "<cmd>lua require('crates').upgrade_crate()<CR>", "Upgrade current crate" },
-								U = { "<cmd>lua require('crates').upgrade_all_crates()<CR>", "Upgrade all crates" },
-							},
-							C = {
-								name = "+crates goto",
-								h = { "<cmd>lua require('crates').open_homepage()<CR>", "Homepage" },
-								r = { "<cmd>lua require('crates').open_repository()<CR>", "Repository" },
-								d = { "<cmd>lua require('crates').open_documentation()<CR>", "Documentation" },
-								c = { "<cmd>lua require('crates').open_crates_io()<CR>", "Crates IO" },
 							},
 						}, { mode = "n", prefix = "<leader>l", buffer = bufnr })
 
@@ -126,15 +99,15 @@ return {
 					settings = {
 						["rust-analyzer"] = {
 							cargo = {
-							    allFeatures = true,
-							    loadOutDirsFromCheck = true,
-							    runBuildScripts = true,
+								allFeatures = true,
+								loadOutDirsFromCheck = true,
+								runBuildScripts = true,
 							},
 							-- Add clippy lints for Rust.
 							checkOnSave = {
-							    allFeatures = true,
-							    command = "clippy",
-							    extraArgs = { "--no-deps" },
+								allFeatures = true,
+								command = "clippy",
+								extraArgs = { "--no-deps" },
 							},
 							procMacro = {
 								enable = true,
@@ -161,6 +134,18 @@ return {
 							end,
 							desc = "Show Crate Documentation",
 						},
+						{ "<leader>llc", "<cmd>lua require('crates').show_popup()<CR>", desc = "Show crate info" },
+						{ "<leader>llf", "<cmd>lua require('crates').show_features_popup()<CR>", desc = "Show crate features" },
+						{ "<leader>llv", "<cmd>lua require('crates').show_versions_popup()<CR>", desc = "Show crate versions" },
+						{ "<leader>lld", "<cmd>lua require('crates').show_dependencies_popup()<CR>", desc = "Show crate dependencies", },
+						{ "<leader>llt", "<cmd>lua require('crates').expand_plain_crate_to_inline_table()<CR>", desc = "Current line crate into inline table", },
+						{ "<leader>llT", "<cmd>lua require('crates').extract_crate_into_table()<CR>", desc = "Current line crate into table", },
+						{ "<leader>llu", "<cmd>lua require('crates').upgrade_crate()<CR>", desc = "Upgrade current crate" },
+						{ "<leader>llU", "<cmd>lua require('crates').upgrade_all_crates()<CR>", desc = "Upgrade all crates" },
+						{ "<leader>llh", "<cmd>lua require('crates').open_homepage()<CR>", desc = "Homepage" },
+						{ "<leader>llr", "<cmd>lua require('crates').open_repository()<CR>", desc = "Repository" },
+						{ "<leader>llD", "<cmd>lua require('crates').open_documentation()<CR>", desc = "Documentation" },
+						{ "<leader>llc", "<cmd>lua require('crates').open_crates_io()<CR>", desc = "Crates IO" },
 					},
 				},
 			},

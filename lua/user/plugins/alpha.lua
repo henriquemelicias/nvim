@@ -23,7 +23,7 @@ return {
 			dashboard.button("SPC F p", " " .. " Projects", ":Telescope project<CR>"),
 			dashboard.button("SPC F r", " " .. " Git Repos", ":Telescope repo<CR>"),
 			dashboard.button("SPC s r", " " .. " Restore last session", [[:lua require("persistence").load({ last = true }) <cr>]]),
-            dashboard.button("SPC U l", " ⏾" .. " Lazy", ":Lazy<CR>"),
+            dashboard.button("SPC U l", "⏾ " .. " Lazy", ":Lazy<CR>"),
 			dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
 			dashboard.button("q", " " .. " Quit", ":qa<CR>"),
 		}
