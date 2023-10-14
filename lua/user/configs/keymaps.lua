@@ -50,7 +50,7 @@ wk.register({
 
 	-- Move text up and down.
 	["<A-k>"] = { ":m .-2<CR>==", "Move selected text up" },
-["<A-j>"] = { ":m .+1<CR>==", "Move selected text down" },
+    ["<A-j>"] = { ":m .+1<CR>==", "Move selected text down" },
 
     ["<leader>p"] = {
 		name = "+project",
@@ -75,7 +75,6 @@ wk.register({
 -- stylua: ignore
 wk.register({
     ["<C-s>"] = { "<cmd>w<CR><esc>", "Save file" },
-    ["<C-m>"] = { "<cmd>norm! K<CR>", "Manual of cursor keyword" }
 }, { mode = { "n", "i", "v", "x" } })
 
 ------------

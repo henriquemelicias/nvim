@@ -14,7 +14,7 @@ function M.get()
         M._keys =  {
             { "gd", vim.lsp.buf.definition, desc = "LSP jump to symbol definition" },
             { "gD", vim.lsp.buf.declaration, desc = "LSP jump to symbol declaration" },
-            { "gI", vim.lsp.buf.implementation, desc = "LSP list symbol implementation gotos" },
+            { "gI", vim.lsp.buf.implementation, desc = "LSP jump to symbol implementation" },
             { "gl", vim.diagnostic.open_float, desc = "LSP (L)ook at diagnostics in a float" },
             { "K", vim.lsp.buf.hover, desc = "LSP display highlighted symbol info" },
             { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "LSP signature help", has = "signatureHelp" },

@@ -18,20 +18,6 @@ return -- Autocompletion
 			"ray-x/cmp-treesitter",
 		},
 		{
-			"roobert/tailwindcss-colorizer-cmp.nvim",
-			event = "VeryLazy",
-			config = function()
-				require("tailwindcss-colorizer-cmp").setup({
-					color_square_width = 2,
-				})
-
-				require("cmp").config.formatting = {
-					format = require("tailwindcss-colorizer-cmp").formatter,
-				}
-			end,
-			dependencies = "nvim-cmp",
-		},
-		{
 			"zbirenbaum/copilot-cmp",
 			dependencies = "copilot.lua",
 			opts = {},
@@ -50,7 +36,7 @@ return -- Autocompletion
 	},
 	opts = function()
 		local cmp = require("cmp")
-        local defaults = require("cmp.config.default")()
+		local defaults = require("cmp.config.default")()
 		local luasnip = require("luasnip")
 
 		local check_backspace = function()
@@ -71,10 +57,10 @@ return -- Autocompletion
 			},
 			sources = {
 				{ name = "npm", keyword_length = 4 },
+				{ name = "copilot", max_item_count = 4 },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "nvim_lsp_document_symbol" },
-				{ name = "copilot", max_item_count = 4 },
 				{ name = "luasnip", max_item_count = 10 },
 				{ name = "treesitter", max_item_count = 10 },
 				{ name = "calc" },
@@ -133,7 +119,7 @@ return -- Autocompletion
 				["<C-j>"] = cmp.mapping.select_next_item(),
 				["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
 				["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-				["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+				["<C-c>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 				["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
 				["<C-a>"] = cmp.mapping({
 					i = cmp.mapping.abort(),
@@ -166,20 +152,20 @@ return -- Autocompletion
 					end
 				end, { "i", "s" }),
 			}),
-			sorting = defaults.sorting
+			sorting = defaults.sorting,
 		}
 	end,
-    config = function(_, opts)
-        local cmp = require("cmp")
+	config = function(_, opts)
+		local cmp = require("cmp")
 
-        cmp.setup(opts)
+		cmp.setup(opts)
 
 		-- Search completion.
-	--	cmp.setup.cmdline({ "/" }, {
-	--		mapping = cmp.mapping.preset.cmdline(),
-	--		sources = {
-	--			{ name = "buffer" },
-	--		},
-	--	})
-    end
+		--	cmp.setup.cmdline({ "/" }, {
+		--		mapping = cmp.mapping.preset.cmdline(),
+		--		sources = {
+		--			{ name = "buffer" },
+		--		},
+		--	})
+	end,
 }

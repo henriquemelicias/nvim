@@ -2,6 +2,7 @@ M = {}
 
 -- DIRECTORIES --
 M.BACKUP_DIR = (os.getenv("XDG_STATE_HOME") or "../..") .. "/nvim/backup"
+M.FORMATS_DIR = vim.fn.stdpath("config") .. "/lua/user/formats/"
 
 -- WORKSPACES --
 -- Used by the telescope find by frecency algorithm.
@@ -28,14 +29,11 @@ M.MASON_ENSURE_INSTALLED = {
 -- LSP SERVERS --
     "asm-lsp",                          -- Assembly
     "buf-language-server",              -- Protobuf
-    "clangd",                           -- C/C++
     "clojure-lsp",                      -- Clojure
     "cmake-language-server",            -- CMake
     "csharp-language-server",           -- C#
     "css-lsp",                          -- CSS
     "cssmodules-language-server",       -- CSS Modules
-    "dockerfile-language-server",       -- Docker
-    "docker-compose-language-service",  -- Docker Compose
     "eslint-lsp",                       -- ESlint
     "gopls",                            -- Go
     "gradle-language-server",           -- Gradle
@@ -53,7 +51,6 @@ M.MASON_ENSURE_INSTALLED = {
     "pyright",                          -- Python
     "sqlls",                            -- SQL
     "svelte-language-server",           -- Svelte
-    "tailwindcss-language-server",      -- Tailwind CSS
     "taplo",                            -- TOML
     "texlab",                           -- LaTeX
     "typescript-language-server",       -- Typescript/JavaScript

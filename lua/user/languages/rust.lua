@@ -5,9 +5,142 @@ return {
 		optional = true,
 		opts = function(_, opts)
 			if type(opts.ensure_installed) == "table" then
-				vim.list_extend(opts.ensure_installed, { "codelldb", "rust-analyzer" })
+				vim.list_extend(opts.ensure_installed, { "codelldb" })
 			end
 		end,
+		init = function()
+			-- Check if mason rust-analyzer version is nightly, else install it.
+			local ok, mason_registry = pcall(require, "mason-registry")
+			if ok then
+				local is_installed = mason_registry.is_installed("rust-analyzer")
+
+				if not is_installed then
+					vim.cmd("MasonInstall rust-analyzer@nightly")
+				end
+			end
+		end,
+	},
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		optional = true,
+		opts = function(_, opts)
+			local null_ls = require("null-ls")
+			local formats_dir = require("user.configs.settings").FORMATS_DIR
+			opts.sources = opts.sources or {}
+			vim.list_extend(opts.sources, {
+				null_ls.builtins.formatting.rustfmt.with({
+					filetypes = { "rust" },
+					command = formats_dir .. "rustfmt",
+					extra_args = { "--edition", "2021", "--config-path", formats_dir .. "rustfmt.toml" },
+				}),
+			})
+		end,
+	},
+	-- Correctly setup lspconfig for Rust 🚀
+	{
+		"neovim/nvim-lspconfig",
+		optional = true,
+		opts = {
+			servers = {
+				-- Ensure mason installs the server
+				rust_analyzer = {
+					settings = {
+						["rust-analyzer"] = {
+							cargo = {
+								allFeatures = true,
+								loadOutDirsFromCheck = true,
+								runBuildScripts = true,
+							},
+							-- Add clippy lints for Rust.
+							checkOnSave = {
+								allFeatures = true,
+								command = "clippy",
+								extraArgs = { "--no-deps" },
+							},
+							procMacro = {
+								enable = false,
+								ignored = {
+									["async-trait"] = { "async_trait" },
+									["napi-derive"] = { "napi" },
+									["async-recursion"] = { "async_recursion" },
+								},
+							},
+                            diagnostics = {
+                                disabled = { "unresolved-proc-macro" }
+                            }
+						},
+					},
+				},
+				taplo = {
+					-- Crates keymap.
+					keys = {
+						{
+							"K",
+							function()
+								if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+									require("crates").show_popup()
+								else
+									vim.lsp.buf.hover()
+								end
+							end,
+							desc = "Show Crate Documentation",
+						},
+						{ "<leader>llc", "<cmd>lua require('crates').show_popup()<CR>", desc = "Show crate info" },
+						{
+							"<leader>llf",
+							"<cmd>lua require('crates').show_features_popup()<CR>",
+							desc = "Show crate features",
+						},
+						{
+							"<leader>llv",
+							"<cmd>lua require('crates').show_versions_popup()<CR>",
+							desc = "Show crate versions",
+						},
+						{
+							"<leader>lld",
+							"<cmd>lua require('crates').show_dependencies_popup()<CR>",
+							desc = "Show crate dependencies",
+						},
+						{
+							"<leader>llt",
+							"<cmd>lua require('crates').expand_plain_crate_to_inline_table()<CR>",
+							desc = "Current line crate into inline table",
+						},
+						{
+							"<leader>llT",
+							"<cmd>lua require('crates').extract_crate_into_table()<CR>",
+							desc = "Current line crate into table",
+						},
+						{
+							"<leader>llu",
+							"<cmd>lua require('crates').upgrade_crate()<CR>",
+							desc = "Upgrade current crate",
+						},
+						{
+							"<leader>llU",
+							"<cmd>lua require('crates').upgrade_all_crates()<CR>",
+							desc = "Upgrade all crates",
+						},
+						{ "<leader>llh", "<cmd>lua require('crates').open_homepage()<CR>", desc = "Homepage" },
+						{ "<leader>llr", "<cmd>lua require('crates').open_repository()<CR>", desc = "Repository" },
+						{
+							"<leader>llD",
+							"<cmd>lua require('crates').open_documentation()<CR>",
+							desc = "Documentation",
+						},
+						{ "<leader>llc", "<cmd>lua require('crates').open_crates_io()<CR>", desc = "Crates IO" },
+					},
+				},
+			},
+			setup = {
+				rust_analyzer = function(_, opts)
+					require("which-key").register({ ["<leader>l"] = { name = "+lsp", l = { name = "+rust" } } })
+					local rust_tools_opts = require("user.utils").opts("rust-tools.nvim")
+					require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
+					return true
+				end,
+			},
+		},
 	},
 	{
 		"simrat39/rust-tools.nvim",
@@ -88,80 +221,10 @@ return {
 		end,
 		config = function() end,
 	},
-
-	-- Correctly setup lspconfig for Rust 🚀
-	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			servers = {
-				-- Ensure mason installs the server
-				rust_analyzer = {
-					settings = {
-						["rust-analyzer"] = {
-							cargo = {
-								allFeatures = true,
-								loadOutDirsFromCheck = true,
-								runBuildScripts = true,
-							},
-							-- Add clippy lints for Rust.
-							checkOnSave = {
-								allFeatures = true,
-								command = "clippy",
-								extraArgs = { "--no-deps" },
-							},
-							procMacro = {
-								enable = true,
-								ignored = {
-									["async-trait"] = { "async_trait" },
-									["napi-derive"] = { "napi" },
-									["async-recursion"] = { "async_recursion" },
-								},
-							},
-						},
-					},
-				},
-				taplo = {
-					-- Crates keymap.
-					keys = {
-						{
-							"K",
-							function()
-								if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-									require("crates").show_popup()
-								else
-									vim.lsp.buf.hover()
-								end
-							end,
-							desc = "Show Crate Documentation",
-						},
-						{ "<leader>llc", "<cmd>lua require('crates').show_popup()<CR>", desc = "Show crate info" },
-						{ "<leader>llf", "<cmd>lua require('crates').show_features_popup()<CR>", desc = "Show crate features" },
-						{ "<leader>llv", "<cmd>lua require('crates').show_versions_popup()<CR>", desc = "Show crate versions" },
-						{ "<leader>lld", "<cmd>lua require('crates').show_dependencies_popup()<CR>", desc = "Show crate dependencies", },
-						{ "<leader>llt", "<cmd>lua require('crates').expand_plain_crate_to_inline_table()<CR>", desc = "Current line crate into inline table", },
-						{ "<leader>llT", "<cmd>lua require('crates').extract_crate_into_table()<CR>", desc = "Current line crate into table", },
-						{ "<leader>llu", "<cmd>lua require('crates').upgrade_crate()<CR>", desc = "Upgrade current crate" },
-						{ "<leader>llU", "<cmd>lua require('crates').upgrade_all_crates()<CR>", desc = "Upgrade all crates" },
-						{ "<leader>llh", "<cmd>lua require('crates').open_homepage()<CR>", desc = "Homepage" },
-						{ "<leader>llr", "<cmd>lua require('crates').open_repository()<CR>", desc = "Repository" },
-						{ "<leader>llD", "<cmd>lua require('crates').open_documentation()<CR>", desc = "Documentation" },
-						{ "<leader>llc", "<cmd>lua require('crates').open_crates_io()<CR>", desc = "Crates IO" },
-					},
-				},
-			},
-			setup = {
-				rust_analyzer = function(_, opts)
-					require("which-key").register({ ["<leader>l"] = { name = "+lsp", l = { name = "+rust" } } })
-					local rust_tools_opts = require("user.utils").opts("rust-tools.nvim")
-					require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
-					return true
-				end,
-			},
-		},
-	},
 	-- Extend auto completion
 	{
 		"hrsh7th/nvim-cmp",
+		optional = true,
 		dependencies = {
 			{
 				"Saecki/crates.nvim",

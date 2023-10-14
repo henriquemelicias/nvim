@@ -81,12 +81,10 @@ return {
     config = function(_, opts)
 
         local Util = require("user.utils")
+
         -- Neoconf.
         local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
-
-        -- Setup autoformat.
-        require("user.lsp.format").setup(opts)
 
         ----------------------------
         -- FORMATTING AND KEYMAPS --
